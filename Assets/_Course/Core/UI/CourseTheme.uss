@@ -1,0 +1,92 @@
+/*
+   The shared look of the course's UI screens.
+   To change the look for your own game, copy this file and the UXML file
+   into Assets/_Game, and edit your copies.
+*/
+
+/* ---------- Full-screen menus ---------- */
+
+.screen {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(24, 28, 38);
+}
+
+/* A see-through version, for screens shown on top of the game. */
+.screen--overlay {
+    background-color: rgba(10, 12, 18, 0.75);
+}
+
+.panel {
+    align-items: center;
+    padding: 32px 48px;
+    background-color: rgb(38, 44, 60);
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: rgb(90, 104, 140);
+}
+
+.title {
+    font-size: 56px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    margin-bottom: 8px;
+    -unity-text-align: middle-center;
+}
+
+.subtitle {
+    font-size: 22px;
+    color: rgb(190, 200, 220);
+    margin-bottom: 28px;
+    -unity-text-align: middle-center;
+}
+
+.menu-button {
+    width: 280px;
+    height: 56px;
+    margin: 8px 0;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(58, 92, 160);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgb(58, 92, 160);
+}
+
+.menu-button:hover {
+    background-color: rgb(78, 118, 196);
+}
+
+.menu-button:focus {
+    border-color: rgb(255, 255, 255);
+}
+
+.menu-button:active {
+    background-color: rgb(44, 70, 124);
+}
+
+/* ---------- HUD ---------- */
+
+.hud {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 16px 24px;
+}
+
+.hud-label {
+    font-size: 28px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    padding: 6px 14px;
+    background-color: rgba(10, 12, 18, 0.6);
+    border-radius: 8px;
+}

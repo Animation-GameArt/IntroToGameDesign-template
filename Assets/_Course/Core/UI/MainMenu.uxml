@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="main-menu" class="screen">
+        <ui:Label name="title-label" text="Game Title" class="title" />
+        <ui:Label name="subtitle-label" text="A game by Your Name" class="subtitle" />
+        <ui:Button name="play-button" text="Play" class="menu-button" />
+        <ui:Button name="quit-button" text="Quit" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

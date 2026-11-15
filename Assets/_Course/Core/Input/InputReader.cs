@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace CollinGame.Core
 {
@@ -44,6 +45,8 @@ namespace CollinGame.Core
         [NonSerialized] InputAction sprint;
         [NonSerialized] InputAction previous;
         [NonSerialized] InputAction next;
+        [NonSerialized] InputAction pause;
+        [NonSerialized] bool playerInputOff;
 
         Action jumpPressed;
         Action jumpReleased;
@@ -57,6 +60,7 @@ namespace CollinGame.Core
         Action sprintReleased;
         Action previousPressed;
         Action nextPressed;
+        Action pausePressed;
 
         // ---------- Values you can read at any time ----------
 
@@ -119,15 +123,19 @@ namespace CollinGame.Core
         /// <summary>Raised at the moment the Next button is pressed (for example, next weapon).</summary>
         public event Action NextPressed { add { Bind(); nextPressed += value; } remove { nextPressed -= value; } }
 
+        /// <summary>Raised at the moment the Pause button is pressed. It keeps working while player input is switched off.</summary>
+        public event Action PausePressed { add { Bind(); pausePressed += value; } remove { pausePressed -= value; } }
+
         // ---------- Turning player input on and off ----------
 
         /// <summary>
         /// Whether the player's controls are switched on. Switch them off during a
-        /// cutscene or a dialogue, and back on afterwards. Menus keep working.
+        /// pause, a cutscene or a dialogue, and back on afterwards. The Pause button
+        /// and menus keep working. They are switched back on whenever a scene loads.
         /// </summary>
         public bool PlayerInputEnabled
         {
-            get => Bind() && playerMap.enabled;
+            get => Bind() && !playerInputOff;
             set
             {
                 if (!Bind())
@@ -135,13 +143,23 @@ namespace CollinGame.Core
                     return;
                 }
 
-                if (value)
+                playerInputOff = !value;
+
+                foreach (InputAction action in playerMap.actions)
                 {
-                    playerMap.Enable();
-                }
-                else
-                {
-                    playerMap.Disable();
+                    if (action == pause)
+                    {
+                        continue; // Pause always stays on, so the game can be un-paused.
+                    }
+
+                    if (value)
+                    {
+                        action.Enable();
+                    }
+                    else
+                    {
+                        action.Disable();
+                    }
                 }
             }
         }
@@ -205,11 +223,11 @@ namespace CollinGame.Core
             sprint = FindAction("Sprint", true);
             previous = FindAction("Previous", true);
             next = FindAction("Next", true);
+            pause = FindAction("Pause", true);
 
-            if (!playerMap.enabled)
-            {
-                playerMap.Enable();
-            }
+            playerMap.Enable();
+            playerInputOff = false;
+            SceneManager.sceneLoaded += OnSceneLoaded;
 
             bound = true;
             return true;
@@ -243,8 +261,11 @@ namespace CollinGame.Core
             StopListening(sprint);
             StopListening(previous);
             StopListening(next);
+            StopListening(pause);
+            SceneManager.sceneLoaded -= OnSceneLoaded;
 
             bound = false;
+            playerInputOff = false;
             bindFailed = false;
         }
 
@@ -269,6 +290,7 @@ namespace CollinGame.Core
             else if (action == sprint) sprintPressed?.Invoke();
             else if (action == previous) previousPressed?.Invoke();
             else if (action == next) nextPressed?.Invoke();
+            else if (action == pause) pausePressed?.Invoke();
         }
 
         // "canceled" is the moment a button comes back up.
@@ -281,6 +303,15 @@ namespace CollinGame.Core
             else if (action == interact) interactReleased?.Invoke();
             else if (action == crouch) crouchReleased?.Invoke();
             else if (action == sprint) sprintReleased?.Invoke();
+        }
+
+        // A new scene always starts with the player's controls switched on.
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            if (mode == LoadSceneMode.Single && playerInputOff)
+            {
+                PlayerInputEnabled = true;
+            }
         }
 
         void OnEnable()
