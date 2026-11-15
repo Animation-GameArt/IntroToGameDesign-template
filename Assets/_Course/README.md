@@ -5,6 +5,7 @@ Everything in this folder belongs to the course. **Don't edit, move or rename an
 | Folder | Contents |
 |---|---|
 | `Core/` | The core scripts every exercise and game uses |
+| `TwoD/` | Scripts for 2D games, such as the player controllers |
 | `Exercises/` | Exercise scenes and prefabs |
 | `Kits/` | Genre kits, added after your pitch is approved |
 | `Games/` | Scripts written for one specific game |
