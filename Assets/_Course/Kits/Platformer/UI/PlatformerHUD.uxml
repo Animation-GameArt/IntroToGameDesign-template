@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+        <ui:Label name="health-label" text="Health: 3" class="hud-label" picking-mode="Ignore" />
+        <ui:Label name="lives-label" text="Lives: 3" class="hud-label" picking-mode="Ignore" />
+        <ui:Label name="coins-label" text="Coins: 0" class="hud-label" picking-mode="Ignore" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -94,9 +94,15 @@ namespace CollinGame.TwoD
         // still touching it on the next step and the jump would count as a landing.
         const float GroundIgnoreAfterJump = 0.1f;
 
+        // Rising faster than this (compared with the ground) means "not standing on it".
+        const float RisingThroughSpeed = 0.1f;
+
         Rigidbody2D body;
         Collider2D bodyCollider;
         readonly Collider2D[] groundHits = new Collider2D[8];
+
+        // The moving object the character is standing on, if any (a moving platform).
+        Rigidbody2D groundBody;
 
         float moveX;
         float coyoteTimer;
@@ -115,6 +121,9 @@ namespace CollinGame.TwoD
 
         /// <summary>1 when facing right, -1 when facing left.</summary>
         public int FacingDirection { get; private set; } = 1;
+
+        /// <summary>The left/right input right now: -1 is full left, 1 is full right, 0 is none.</summary>
+        public float MoveInput => moveX;
 
         void Awake()
         {
@@ -211,20 +220,29 @@ namespace CollinGame.TwoD
                 rate *= airControl;
             }
 
-            velocity.x = Mathf.MoveTowards(velocity.x, targetSpeed, rate * step);
+            // Speeds are measured against the ground, so the character can stand
+            // still on a moving platform and be carried along with it.
+            Vector2 groundVelocity = GroundVelocity();
+            velocity.x = Mathf.MoveTowards(velocity.x - groundVelocity.x, targetSpeed, rate * step) + groundVelocity.x;
+
+            // Stay on a platform that is moving down, and don't hover above it.
+            if (IsGrounded && !isJumping && groundVelocity.y < 0f && velocity.y > groundVelocity.y)
+            {
+                velocity.y = groundVelocity.y;
+            }
 
             // ----- Jumping -----
             if (jumpBufferTimer > 0f)
             {
                 if (coyoteTimer > 0f)
                 {
-                    velocity.y = JumpSpeed();
+                    velocity.y = SpeedToReach(jumpHeight);
                     StartJump();
                 }
                 else if (airJumpsLeft > 0)
                 {
                     airJumpsLeft--;
-                    velocity.y = JumpSpeed();
+                    velocity.y = SpeedToReach(jumpHeight);
                     StartJump();
                 }
             }
@@ -310,12 +328,26 @@ namespace CollinGame.TwoD
             for (int i = 0; i < count; i++)
             {
                 // Anything that isn't part of this character counts as ground.
-                if (groundHits[i] != null && groundHits[i].attachedRigidbody != body)
+                if (groundHits[i] == null || groundHits[i].attachedRigidbody == body)
                 {
-                    return true;
+                    continue;
                 }
+
+                Rigidbody2D hitBody = groundHits[i].attachedRigidbody;
+                float groundSpeedY = hitBody != null && hitBody.bodyType == RigidbodyType2D.Kinematic ? hitBody.linearVelocity.y : 0f;
+
+                // While the character is rising faster than this ground, it is
+                // passing up through it (a one-way platform), not standing on it.
+                if (body.linearVelocity.y - groundSpeedY > RisingThroughSpeed)
+                {
+                    continue;
+                }
+
+                groundBody = hitBody;
+                return true;
             }
 
+            groundBody = null;
             return false;
         }
 
@@ -332,11 +364,48 @@ namespace CollinGame.TwoD
             return new Vector2(width, groundCheckDistance);
         }
 
-        // The upward speed needed to reach Jump Height under this character's gravity.
-        float JumpSpeed()
+        // The upward speed needed to rise a number of units under this character's gravity.
+        float SpeedToReach(float height)
         {
             float gravity = Mathf.Abs(Physics2D.gravity.y) * gravityScale;
-            return Mathf.Sqrt(2f * gravity * jumpHeight);
+            return Mathf.Sqrt(2f * gravity * Mathf.Max(0f, height));
+        }
+
+        // How fast the ground under the character is moving. Only moving
+        // platforms (kinematic bodies) count; ordinary ground is still.
+        Vector2 GroundVelocity()
+        {
+            if (IsGrounded && groundBody != null && groundBody.bodyType == RigidbodyType2D.Kinematic)
+            {
+                return groundBody.linearVelocity;
+            }
+
+            return Vector2.zero;
+        }
+
+        /// <summary>
+        /// Launches the character upward to a height in units, as a spring or a
+        /// stomped enemy does. It isn't a jump, so letting go of Jump doesn't cut it short.
+        /// </summary>
+        public void Bounce(float height)
+        {
+            if (body == null)
+            {
+                return;
+            }
+
+            Vector2 velocity = body.linearVelocity;
+            velocity.y = SpeedToReach(height);
+            body.linearVelocity = velocity;
+
+            isJumping = false;
+            shortHopRequested = false;
+            jumpBufferTimer = 0f;
+            coyoteTimer = 0f;
+            groundIgnoreTimer = GroundIgnoreAfterJump;
+            IsGrounded = false;
+            groundBody = null;
+            airJumpsLeft = extraAirJumps;
         }
 
         void StartJump()
@@ -346,6 +415,7 @@ namespace CollinGame.TwoD
             coyoteTimer = 0f;
             groundIgnoreTimer = GroundIgnoreAfterJump;
             IsGrounded = false;
+            groundBody = null;
             onJump?.Invoke();
         }
 

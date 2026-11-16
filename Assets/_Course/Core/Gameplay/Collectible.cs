@@ -27,6 +27,9 @@ namespace CollinGame.Core
         [Tooltip("How much to add.")]
         [SerializeField] int amount = 1;
 
+        [Tooltip("Health to give back to whoever collects this. 0 means none. Use it for hearts and health packs.")]
+        [SerializeField, Min(0)] int heal = 0;
+
         [Tooltip("Optional. An event to raise, so other objects can react.")]
         [SerializeField] VoidEventChannel raiseEvent;
 
@@ -64,11 +67,16 @@ namespace CollinGame.Core
                 return;
             }
 
-            Collect();
+            Collect(collector);
         }
 
         /// <summary>Collects this right now, without anything having to touch it.</summary>
         public void Collect()
+        {
+            Collect(null);
+        }
+
+        void Collect(GameObject collector)
         {
             if (collected)
             {
@@ -76,6 +84,16 @@ namespace CollinGame.Core
             }
 
             collected = true;
+
+            if (heal > 0 && collector != null)
+            {
+                Health collectorHealth = collector.GetComponent<Health>();
+
+                if (collectorHealth != null)
+                {
+                    collectorHealth.Heal(heal);
+                }
+            }
 
             if (addTo != null)
             {
