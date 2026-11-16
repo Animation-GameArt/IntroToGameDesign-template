@@ -55,7 +55,14 @@ namespace CollinGame.EditorTools
                 }
 
                 importer.textureType = TextureImporterType.Sprite;
-                importer.spriteImportMode = SpriteImportMode.Single;
+
+                // Images in a "Tiles" folder are one sprite each. Tile sheets
+                // keep whatever slicing they already have.
+                if (assetPath.Contains("/Tiles/"))
+                {
+                    importer.spriteImportMode = SpriteImportMode.Single;
+                }
+
                 importer.spritePixelsPerUnit = packs[i].pixelsPerUnit;
                 importer.mipmapEnabled = false;
 
