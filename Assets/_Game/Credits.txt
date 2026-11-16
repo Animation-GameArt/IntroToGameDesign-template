@@ -1,0 +1,17 @@
+GAME TITLE
+
+Design, art and programming
+Your Name
+
+Made for GAME 1303 Intro to Game Design
+Collin College
+
+
+ASSETS
+
+Add an entry here for every asset you didn't make yourself:
+its name, who made it, where it came from, and its license.
+
+Example Asset Pack
+Author Name (website)
+License: CC0

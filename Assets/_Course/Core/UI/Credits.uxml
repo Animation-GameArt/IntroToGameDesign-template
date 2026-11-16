@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="credits" class="screen">
+        <ui:Label name="title-label" text="Credits" class="title" />
+        <ui:ScrollView name="credits-scroll" class="credits-scroll">
+            <ui:Label name="credits-label" text="Credits appear here." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

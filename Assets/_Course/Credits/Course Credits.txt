@@ -1,0 +1,11 @@
+COURSE MATERIALS
+
+Course scripts and project template
+Intro to Game Design, Collin College
+License: CC0 1.0 Universal
+
+Liberation Sans font
+Included with TextMeshPro
+License: SIL Open Font License 1.1
+
+Built with Unity
