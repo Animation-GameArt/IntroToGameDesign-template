@@ -8,4 +8,8 @@ Liberation Sans font
 Included with TextMeshPro
 License: SIL Open Font License 1.1
 
+Pixel Platformer art pack
+Kenney (www.kenney.nl)
+License: CC0 1.0 Universal
+
 Built with Unity
