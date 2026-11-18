@@ -31,6 +31,15 @@ namespace CollinGame.Core
         /// <summary>True while the game is paused.</summary>
         public bool IsPaused { get; private set; }
 
+        /// <summary>True while any Pause Controller has the game paused.</summary>
+        public static bool GamePaused { get; private set; }
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetStatics()
+        {
+            GamePaused = false;
+        }
+
         void Awake()
         {
             if (input == null)
@@ -58,6 +67,7 @@ namespace CollinGame.Core
             if (IsPaused)
             {
                 IsPaused = false;
+                GamePaused = false;
                 Time.timeScale = 1f;
 
                 if (input != null)
@@ -93,13 +103,14 @@ namespace CollinGame.Core
                 return;
             }
 
-            // Don't pause in the middle of a scene change.
-            if (SceneLoader.Instance != null && SceneLoader.Instance.IsLoading)
+            // Don't pause in the middle of a scene change or a cutscene.
+            if ((SceneLoader.Instance != null && SceneLoader.Instance.IsLoading) || CutscenePlayer.AnyPlaying)
             {
                 return;
             }
 
             IsPaused = true;
+            GamePaused = true;
             Time.timeScale = 0f;
 
             if (input != null)
@@ -129,6 +140,7 @@ namespace CollinGame.Core
             }
 
             IsPaused = false;
+            GamePaused = false;
             Time.timeScale = 1f;
 
             if (input != null)

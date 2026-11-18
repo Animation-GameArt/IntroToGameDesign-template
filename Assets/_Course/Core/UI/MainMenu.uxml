@@ -4,6 +4,7 @@
         <ui:Label name="title-label" text="Game Title" class="title" />
         <ui:Label name="subtitle-label" text="A game by Your Name" class="subtitle" />
         <ui:Button name="play-button" text="Play" class="menu-button" />
+        <ui:Button name="settings-button" text="Settings" class="menu-button" />
         <ui:Button name="credits-button" text="Credits" class="menu-button" />
         <ui:Button name="quit-button" text="Quit" class="menu-button" />
     </ui:VisualElement>

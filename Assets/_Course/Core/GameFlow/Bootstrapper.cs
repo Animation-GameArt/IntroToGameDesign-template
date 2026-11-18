@@ -10,6 +10,8 @@ namespace CollinGame.Core
     /// Because this runs by itself, you can press Play from any scene and the
     /// services are always there. You never add this script to a GameObject.
     ///
+    /// The services are the Scene Loader (with its Screen Fader) and the Audio Service.
+    ///
     /// Optional: if a prefab named "CourseServices" exists in a Resources folder,
     /// it is used instead of an empty object, so its settings can be changed in
     /// the Inspector.
@@ -47,6 +49,11 @@ namespace CollinGame.Core
             if (Services.GetComponent<SceneLoader>() == null)
             {
                 Services.AddComponent<SceneLoader>();
+            }
+
+            if (Services.GetComponent<AudioService>() == null)
+            {
+                Services.AddComponent<AudioService>();
             }
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace CollinGame.Core
@@ -52,6 +53,56 @@ namespace CollinGame.Core
 
             Changed?.Invoke(currentValue);
             NotifyValueChanged();
+        }
+
+        public override string ToSaveText()
+        {
+            object value = currentValue;
+
+            if (value == null)
+            {
+                return string.Empty;
+            }
+
+            if (value is float number)
+            {
+                return number.ToString("R", CultureInfo.InvariantCulture);
+            }
+
+            if (value is bool flag)
+            {
+                return flag ? "true" : "false";
+            }
+
+            return Convert.ToString(value, CultureInfo.InvariantCulture);
+        }
+
+        public override bool LoadFromSaveText(string text)
+        {
+            try
+            {
+                object parsed;
+
+                if (typeof(T) == typeof(string))
+                {
+                    parsed = text ?? string.Empty;
+                }
+                else if (typeof(T) == typeof(bool))
+                {
+                    parsed = bool.Parse(text);
+                }
+                else
+                {
+                    parsed = Convert.ChangeType(text, typeof(T), CultureInfo.InvariantCulture);
+                }
+
+                SetValue((T)parsed);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public override void ResetToInitial()

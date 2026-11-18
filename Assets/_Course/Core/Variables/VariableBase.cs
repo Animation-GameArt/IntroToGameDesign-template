@@ -37,6 +37,12 @@ namespace CollinGame.Core
         /// <summary>Sets the value back to the Initial Value.</summary>
         public abstract void ResetToInitial();
 
+        /// <summary>The current value as text for a save, written the same way on every computer.</summary>
+        public abstract string ToSaveText();
+
+        /// <summary>Sets the value from text written by ToSaveText. Returns false if the text can't be read.</summary>
+        public abstract bool LoadFromSaveText(string text);
+
         protected void NotifyValueChanged()
         {
             ValueChanged?.Invoke();

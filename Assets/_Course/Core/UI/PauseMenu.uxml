@@ -4,6 +4,7 @@
         <ui:VisualElement class="panel">
             <ui:Label name="title-label" text="Paused" class="title" />
             <ui:Button name="resume-button" text="Resume" class="menu-button" />
+            <ui:Button name="settings-button" text="Settings" class="menu-button" />
             <ui:Button name="restart-button" text="Restart" class="menu-button" />
             <ui:Button name="menu-button" text="Main Menu" class="menu-button" />
         </ui:VisualElement>
