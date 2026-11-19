@@ -96,11 +96,21 @@ namespace CollinGame.Kits.PhysicsPuzzle
 
                 if (linkSprite != null)
                 {
-                    SpriteRenderer renderer = link.AddComponent<SpriteRenderer>();
+                    // The picture goes on a child, stretched to the link's size,
+                    // so stretching it doesn't change the collider.
+                    GameObject look = new GameObject("Look");
+                    look.transform.SetParent(link.transform, false);
+
+                    SpriteRenderer renderer = look.AddComponent<SpriteRenderer>();
                     renderer.sprite = linkSprite;
                     renderer.color = linkColor;
-                    renderer.drawMode = SpriteDrawMode.Sliced;
-                    renderer.size = new Vector2(thickness, linkLength);
+                    renderer.sortingOrder = 2;
+
+                    Vector2 spriteSize = linkSprite.bounds.size;
+                    look.transform.localScale = new Vector3(
+                        spriteSize.x > 0f ? thickness / spriteSize.x : 1f,
+                        spriteSize.y > 0f ? linkLength / spriteSize.y : 1f,
+                        1f);
                 }
 
                 previous = body;
