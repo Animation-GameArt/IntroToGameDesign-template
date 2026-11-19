@@ -119,7 +119,7 @@ namespace CollinGame.Kits.ArcadeClassic
                 return;
             }
 
-            live.RemoveAll(shot => shot == null || !shot.activeInHierarchy);
+            live.RemoveAll(old => old == null || !old.activeInHierarchy);
 
             if (maxOnScreen > 0 && live.Count >= maxOnScreen)
             {
