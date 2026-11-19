@@ -1,0 +1,18 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/TurnBasedBattle/UI/BattleUI.uss" />
+    <ui:VisualElement name="battle-root" class="battle-root" picking-mode="Ignore">
+        <ui:Label name="status-label" text="Round 1" class="battle-status" picking-mode="Ignore" />
+        <ui:VisualElement name="battle-bottom" class="battle-bottom" picking-mode="Ignore">
+            <ui:VisualElement name="battle-log" class="battle-log" picking-mode="Ignore">
+                <ui:Label name="log-label" text="" class="battle-log-text" picking-mode="Ignore" />
+            </ui:VisualElement>
+            <ui:VisualElement name="battle-menu" class="battle-menu">
+                <ui:Label name="actor-label" text="Hero's turn" class="battle-actor" />
+                <ui:Label name="description-label" text="" class="battle-description" />
+                <ui:VisualElement name="actions" class="battle-buttons" />
+                <ui:VisualElement name="targets" class="battle-buttons" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

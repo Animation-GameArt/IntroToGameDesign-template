@@ -1,0 +1,27 @@
+# ------------------------------------------------------------------------
+# Left out of the project ZIP that students download
+# ------------------------------------------------------------------------
+# GitHub's "Download ZIP" button and the "Source code (zip)" file on each
+# Release are made with `git archive`, which skips anything marked
+# export-ignore. These folders stay in the repository for development, and
+# reach students another way:
+#   Kits and their art   as separate .unitypackage files, from week 8
+#   Exercise scenes      are the instructor's tested copies; students make their own
+# Each folder keeps its README, so the folder (and its .meta file) still
+# arrives and Unity doesn't warn about a missing folder.
+
+Assets/_Course/Kits/** export-ignore
+Assets/_Course/Kits/README.md -export-ignore
+Assets/_Course/Kits/README.md.meta -export-ignore
+
+Assets/_Course/Art/Kenney/** export-ignore
+Assets/_Course/Art/Kenney/README.md -export-ignore
+Assets/_Course/Art/Kenney/README.md.meta -export-ignore
+
+Assets/Scenes/Exercises/** export-ignore
+Assets/Scenes/Exercises/README.md -export-ignore
+Assets/Scenes/Exercises/README.md.meta -export-ignore
+
+# Repository files students don't need.
+.gitattributes export-ignore
+.vscode/** export-ignore

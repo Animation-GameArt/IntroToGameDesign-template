@@ -1,0 +1,48 @@
+/*
+   Styles for the Top-Down Adventure Kit's HUD: the row of hearts and the
+   message box. To change them for your own game, copy this file and
+   AdventureHUD.uxml into Assets/_Game, and edit your copies.
+*/
+
+.hearts {
+    flex-direction: row;
+    margin-bottom: 8px;
+}
+
+.heart {
+    width: 36px;
+    height: 36px;
+    margin-right: 6px;
+    background-color: rgb(226, 62, 74);
+    border-radius: 6px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.heart--empty {
+    background-color: rgba(226, 62, 74, 0.25);
+}
+
+/* With heart sprites, only the sprite is drawn. */
+.heart--sprite {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0;
+}
+
+.message-box {
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    bottom: 40px;
+    padding: 18px 28px;
+    background-color: rgba(18, 20, 28, 0.85);
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: rgb(225, 230, 240);
+}
+
+.message-text {
+    font-size: 26px;
+    color: rgb(240, 242, 248);
+    white-space: normal;
+    -unity-text-align: middle-center;
+}

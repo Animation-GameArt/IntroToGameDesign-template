@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/ArcadeClassic/UI/ArcadeHUD.uss" />
+    <ui:VisualElement name="pong-scores" class="pong-scores" picking-mode="Ignore">
+        <ui:Label name="left-score" text="0" class="pong-score" picking-mode="Ignore" />
+        <ui:Label name="right-score" text="0" class="pong-score" picking-mode="Ignore" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,21 @@
+/*
+   Styles for the Arcade Classic Kit's HUDs. To change them for your own game,
+   copy this file and the UXML files into Assets/_Game, and edit your copies.
+*/
+
+.pong-scores {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    right: 0;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pong-score {
+    width: 160px;
+    font-size: 72px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: rgba(255, 255, 255, 0.85);
+}

@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/ArcadeClassic/UI/ArcadeHUD.uss" />
+    <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+        <ui:Label name="score-label" text="Score: 0" class="hud-label" picking-mode="Ignore" />
+        <ui:Label name="best-label" text="Best: 0" class="hud-label" picking-mode="Ignore" />
+        <ui:Label name="lives-label" text="Lives: 3" class="hud-label" picking-mode="Ignore" />
+    </ui:VisualElement>
+</ui:UXML>
