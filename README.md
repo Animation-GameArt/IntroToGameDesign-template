@@ -24,7 +24,7 @@ The first time the project opens, Unity builds its `Library` folder. This takes 
 
 | Folder | Whose | Contents |
 |---|---|---|
-| `Assets/_Course/` | The course | Core scripts, exercises, genre kits. **Don't edit anything here.** |
+| `Assets/_Course/` | The course | Core scripts, 2D and 3D scripts, genre kits. **Don't edit anything here.** |
 | `Assets/_Game/` | Yours | Everything you make for your own game |
 | `Assets/Scenes/Exercises/` | Yours | Your saved copies of the exercise scenes |
 
