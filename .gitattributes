@@ -18,6 +18,10 @@ Assets/_Course/Art/Kenney/** export-ignore
 Assets/_Course/Art/Kenney/README.md -export-ignore
 Assets/_Course/Art/Kenney/README.md.meta -export-ignore
 
+# The 3D scripts are used in the separate 3D course project.
+Assets/_Course/ThreeD export-ignore
+Assets/_Course/ThreeD.meta export-ignore
+
 Assets/Scenes/Exercises/** export-ignore
 Assets/Scenes/Exercises/README.md -export-ignore
 Assets/Scenes/Exercises/README.md.meta -export-ignore
