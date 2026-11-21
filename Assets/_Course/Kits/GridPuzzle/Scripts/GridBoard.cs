@@ -231,7 +231,7 @@ namespace CollinGame.Kits.GridPuzzle
 
             // Move the front-most players first, so players in a line don't block each other.
             List<GridPiece> players = pieces.FindAll(p => p != null && p.gameObject.activeInHierarchy && p.PieceRole == GridPiece.Role.Player);
-            players.Sort((a, b) => Vector2Int.Dot(b.Cell, direction).CompareTo(Vector2Int.Dot(a.Cell, direction)));
+            players.Sort((a, b) => Ahead(b.Cell, direction).CompareTo(Ahead(a.Cell, direction)));
 
             bool anyMoved = false;
 
@@ -266,6 +266,9 @@ namespace CollinGame.Kits.GridPuzzle
             CheckSolved();
             return true;
         }
+
+        // How far along the direction a cell is: bigger is further ahead.
+        static int Ahead(Vector2Int cell, Vector2Int direction) => cell.x * direction.x + cell.y * direction.y;
 
         bool CanMove(GridPiece piece, Vector2Int direction, int pushesLeft)
         {
