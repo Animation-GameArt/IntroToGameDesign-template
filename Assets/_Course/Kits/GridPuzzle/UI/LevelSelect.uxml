@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/GridPuzzle/UI/PuzzleUI.uss" />
+    <ui:VisualElement name="level-select" class="screen">
+        <ui:VisualElement class="panel">
+            <ui:Label name="title-label" text="Choose a Level" class="title" />
+            <ui:VisualElement name="levels" class="level-grid" />
+            <ui:Button name="back-button" text="Back" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
