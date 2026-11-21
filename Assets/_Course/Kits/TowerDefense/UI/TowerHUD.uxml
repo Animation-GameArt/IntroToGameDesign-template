@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/TowerDefense/UI/TowerUI.uss" />
+    <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+        <ui:Label name="money-label" text="$100" class="hud-label" picking-mode="Ignore" />
+        <ui:Label name="lives-label" text="Lives: 20" class="hud-label" picking-mode="Ignore" />
+        <ui:Label name="wave-label" text="Wave 0 / 10" class="hud-label" picking-mode="Ignore" />
+    </ui:VisualElement>
+    <ui:Button name="start-wave-button" text="Start Wave" class="menu-button start-wave" />
+    <ui:VisualElement name="build-menu" class="build-menu">
+        <ui:Label name="build-title" text="Build" class="build-title" />
+        <ui:VisualElement name="tower-buttons" />
+        <ui:Button name="upgrade-button" text="Upgrade" class="build-action" />
+        <ui:Button name="sell-button" text="Sell" class="build-action" />
+        <ui:Button name="close-button" text="Close" class="build-close" />
+    </ui:VisualElement>
+</ui:UXML>

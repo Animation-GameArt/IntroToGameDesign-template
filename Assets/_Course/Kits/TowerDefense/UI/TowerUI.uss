@@ -1,0 +1,48 @@
+/*
+   Styles for the Tower Defense Kit's HUD and build menu. To change them for
+   your own game, copy this file and TowerHUD.uxml into Assets/_Game, and edit
+   your copies.
+*/
+
+.start-wave {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    width: 220px;
+    height: 64px;
+    font-size: 24px;
+}
+
+.build-menu {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    width: 380px;
+    padding: 16px 18px;
+    background-color: rgba(30, 34, 46, 0.92);
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: rgb(90, 104, 140);
+}
+
+.build-title {
+    font-size: 26px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 102);
+    margin-bottom: 8px;
+}
+
+.tower-button,
+.build-action {
+    height: 52px;
+    margin: 4px 0;
+    font-size: 20px;
+    -unity-text-align: middle-left;
+    padding-left: 14px;
+}
+
+.build-close {
+    margin-top: 8px;
+    height: 40px;
+    font-size: 18px;
+}

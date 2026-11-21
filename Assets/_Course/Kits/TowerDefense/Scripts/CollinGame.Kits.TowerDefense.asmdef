@@ -1,0 +1,17 @@
+{
+    "name": "CollinGame.Kits.TowerDefense",
+    "rootNamespace": "CollinGame.Kits.TowerDefense",
+    "references": [
+        "CollinGame.Core",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
