@@ -15,6 +15,8 @@ Tiny Town
 Physics Assets
 Puzzle Pack 2
 Space Shooter Remastered
+Pixel Shmup
+Sokoban
 Pixel UI Pack
 License: CC0 1.0 Universal
 

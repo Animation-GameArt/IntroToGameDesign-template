@@ -42,7 +42,7 @@ namespace CollinGame.EditorTools
             new Pack("Assets/_Course/Art/Kenney/kenney_space-shooter-remastered/", 100, false),
             new Pack("Assets/_Course/Art/Kenney/kenney_pixel-ui-pack/", 100, true),
             new Pack("Assets/_Course/Art/Kenney/kenney_pixel-shmup/", 16, true),
-            new Pack("Assets/_Course/Art/Kenney/kenney_sokoban/", 64, false),
+            new Pack("Assets/_Course/Art/Kenney/kenney_sokoban-pack/", 64, false),
         };
 
         static bool reapplying;
