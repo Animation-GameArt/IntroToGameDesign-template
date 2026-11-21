@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/GridPuzzle/UI/PuzzleUI.uss" />
+    <ui:VisualElement name="puzzle-solved" class="screen screen--overlay">
+        <ui:VisualElement class="panel">
+            <ui:Label name="title-label" text="Solved!" class="title" />
+            <ui:Label name="moves-label" text="Moves: 0" class="subtitle" />
+            <ui:Button name="next-button" text="Next Level" class="menu-button" />
+            <ui:Button name="select-button" text="Level Select" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

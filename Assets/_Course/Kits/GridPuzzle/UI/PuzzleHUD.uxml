@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/GridPuzzle/UI/PuzzleUI.uss" />
+    <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+        <ui:Label name="level-label" text="Level 1" class="hud-label" picking-mode="Ignore" />
+        <ui:Label name="moves-label" text="Moves: 0" class="hud-label" picking-mode="Ignore" />
+    </ui:VisualElement>
+    <ui:Label name="help-label" text="Z: Undo     R: Restart     Esc: Menu" class="puzzle-help" picking-mode="Ignore" />
+</ui:UXML>

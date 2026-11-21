@@ -1,0 +1,33 @@
+/*
+   Styles for the Grid Puzzle Kit's screens. To change them for your own game,
+   copy this file and the UXML files into Assets/_Game, and edit your copies.
+*/
+
+.puzzle-help {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    font-size: 20px;
+    -unity-text-align: middle-center;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.level-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 900px;
+    margin: 16px 0;
+}
+
+.level-button {
+    width: 160px;
+    height: 70px;
+    margin: 6px;
+    font-size: 22px;
+}
+
+.level-button--solved {
+    background-color: rgb(52, 120, 74);
+}
