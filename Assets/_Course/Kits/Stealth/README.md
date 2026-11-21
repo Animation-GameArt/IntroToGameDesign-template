@@ -8,7 +8,7 @@ Scripts and a HUD for 3D stealth and horror games: guards or monsters that patro
 | `UI/` | The stealth HUD: alert meter, state, objective, message and battery |
 | `Sample/` | The sample level |
 
-The kit uses the course's Core and 3D scripts (Player Controller 3D). Guards walk on a NavMesh, which needs Unity's **AI Navigation** package (Window → Package Manager → Unity Registry → AI Navigation).
+The kit uses the course's Core and 3D scripts (Player Controller 3D). Guards walk on a NavMesh, made with Unity's **AI Navigation** package, which is already in the course project.
 
 Like everything in `_Course`, don't edit these files. Copy what you want to change into `Assets/_Game`.
 
