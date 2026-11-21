@@ -1,0 +1,18 @@
+{
+    "name": "CollinGame.Kits.Stealth",
+    "rootNamespace": "CollinGame.Kits.Stealth",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.ThreeD",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

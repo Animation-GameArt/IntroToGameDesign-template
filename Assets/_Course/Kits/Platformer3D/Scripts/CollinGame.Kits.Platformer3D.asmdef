@@ -1,0 +1,17 @@
+{
+    "name": "CollinGame.Kits.Platformer3D",
+    "rootNamespace": "CollinGame.Kits.Platformer3D",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.ThreeD"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
