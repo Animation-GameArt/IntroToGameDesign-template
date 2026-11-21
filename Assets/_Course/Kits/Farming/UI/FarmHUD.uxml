@@ -1,0 +1,45 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/Farming/UI/FarmUI.uss" />
+    <ui:VisualElement name="farm-root" class="farm-root" picking-mode="Ignore">
+        <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+            <ui:Label name="day-label" text="Day 1" class="hud-label" picking-mode="Ignore" />
+            <ui:Label name="clock-label" text="6:00 AM" class="hud-label" picking-mode="Ignore" />
+            <ui:Label name="money-label" text="$0" class="hud-label" picking-mode="Ignore" />
+            <ui:Label name="energy-label" text="Energy: 30" class="hud-label" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:Label name="message-label" text="Message" class="farm-message" picking-mode="Ignore" />
+        <ui:VisualElement class="farm-bottom" picking-mode="Ignore">
+            <ui:Button name="prompt-button" text="E: Use" class="farm-prompt" />
+            <ui:Label name="selected-label" text="Hoe" class="farm-selected" picking-mode="Ignore" />
+            <ui:VisualElement name="hotbar" class="hotbar" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="shop-panel" class="screen screen--overlay">
+        <ui:VisualElement class="panel shop">
+            <ui:Label name="shop-title" text="Shop" class="title" />
+            <ui:VisualElement class="shop-columns">
+                <ui:VisualElement class="shop-column">
+                    <ui:Label text="Buy" class="subtitle" />
+                    <ui:ScrollView name="buy-scroll" class="shop-scroll">
+                        <ui:VisualElement name="buy-list" />
+                    </ui:ScrollView>
+                </ui:VisualElement>
+                <ui:VisualElement class="shop-column">
+                    <ui:Label text="Sell" class="subtitle" />
+                    <ui:ScrollView name="sell-scroll" class="shop-scroll">
+                        <ui:VisualElement name="sell-list" />
+                    </ui:ScrollView>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:Button name="shop-close-button" text="Leave" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="report-panel" class="screen screen--overlay">
+        <ui:VisualElement class="panel">
+            <ui:Label text="Good morning" class="title" />
+            <ui:Label name="report-label" text="Day 1 is over." class="report-text" />
+            <ui:Button name="report-continue-button" text="Start the Day" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
