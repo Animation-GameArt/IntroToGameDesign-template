@@ -6,8 +6,7 @@
         "CollinGame.Core.Editor",
         "CollinGame.TwoD",
         "CollinGame.Kits.Platformer",
-        "Unity.Cinemachine",
-        "Unity.RenderPipelines.Universal.Runtime"
+        "Unity.Cinemachine"
     ],
     "includePlatforms": [
         "Editor"

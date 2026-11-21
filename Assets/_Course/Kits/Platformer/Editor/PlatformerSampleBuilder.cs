@@ -12,7 +12,6 @@ using UnityEditor.Events;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -335,7 +334,7 @@ namespace CollinGame.Kits.Platformer.EditorTools
 
             for (int i = 0; i < 3; i++)
             {
-                GameObject part = SpriteObject("Part " + (i + 1), Tile(platformTiles[i]), 0);
+                GameObject part = SpriteObject("Part " + (i + 1), TileSprite(platformTiles[i]), 0);
                 part.transform.SetParent(platform.transform, false);
                 part.transform.localPosition = new Vector3(i - 1, 0f, 0f);
             }
@@ -721,11 +720,28 @@ namespace CollinGame.Kits.Platformer.EditorTools
             return camera;
         }
 
+        // A Global Light 2D, as in Unity's 2D scene template. The Light 2D type lives in
+        // a URP assembly whose name has changed between versions, so it's found by name.
         static void GlobalLight()
         {
+            Type lightType = AppDomain.CurrentDomain.GetAssemblies()
+                .Select(assembly => assembly.GetType("UnityEngine.Rendering.Universal.Light2D", false))
+                .FirstOrDefault(type => type != null);
+
+            if (lightType == null)
+            {
+                Debug.LogWarning("Platformer sample: couldn't find the Light 2D component, so the level has no Global Light 2D. Add one with GameObject → Light → Global Light 2D.");
+                return;
+            }
+
             GameObject go = new GameObject("Global Light 2D");
-            Light2D light = go.AddComponent<Light2D>();
-            light.lightType = Light2D.LightType.Global;
+            Component light = go.AddComponent(lightType);
+            PropertyInfo kind = lightType.GetProperty("lightType");
+
+            if (kind != null)
+            {
+                kind.SetValue(light, Enum.Parse(kind.PropertyType, "Global"));
+            }
         }
 
         static void SavePrefab(Assets a, GameObject go)
