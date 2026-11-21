@@ -1,0 +1,169 @@
+/*
+   Styles for the Farming Kit's screen. To change them for your own game,
+   copy this file and FarmHUD.uxml into Assets/_Game, and edit your copies.
+*/
+
+.farm-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.farm-message {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    -unity-text-align: middle-center;
+    font-size: 24px;
+    color: rgb(255, 240, 200);
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgb(20, 20, 20);
+}
+
+.farm-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 16px;
+    align-items: center;
+}
+
+.farm-prompt {
+    font-size: 22px;
+    padding: 6px 18px;
+    margin-bottom: 8px;
+    background-color: rgba(30, 34, 46, 0.9);
+    color: rgb(255, 214, 102);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgb(255, 214, 102);
+}
+
+.farm-selected {
+    font-size: 20px;
+    color: white;
+    margin-bottom: 4px;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgb(20, 20, 20);
+}
+
+.hotbar {
+    flex-direction: row;
+    padding: 6px;
+    background-color: rgba(30, 34, 46, 0.85);
+    border-radius: 10px;
+}
+
+.hotbar-slot {
+    width: 72px;
+    height: 72px;
+    margin: 3px;
+    background-color: rgba(70, 76, 96, 0.9);
+    border-radius: 6px;
+    border-width: 3px;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.hotbar-slot:hover {
+    background-color: rgba(95, 102, 126, 0.95);
+}
+
+.hotbar-slot--selected {
+    border-color: rgb(255, 214, 102);
+}
+
+.hotbar-icon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.hotbar-key {
+    position: absolute;
+    left: 4px;
+    top: 0;
+    font-size: 14px;
+    color: rgb(200, 205, 220);
+}
+
+.hotbar-count {
+    position: absolute;
+    right: 4px;
+    bottom: 0;
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: white;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgb(20, 20, 20);
+}
+
+.shop {
+    width: 860px;
+}
+
+.shop-columns {
+    flex-direction: row;
+    margin-bottom: 12px;
+}
+
+.shop-column {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin: 0 8px;
+}
+
+.shop-scroll {
+    height: 320px;
+}
+
+.shop-row {
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 6px;
+    margin-bottom: 4px;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+}
+
+.shop-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.shop-name {
+    flex-grow: 1;
+    font-size: 20px;
+}
+
+.shop-price {
+    font-size: 18px;
+    color: rgb(255, 214, 102);
+    margin-right: 8px;
+}
+
+.shop-button {
+    height: 38px;
+    min-width: 64px;
+    font-size: 18px;
+}
+
+.shop-empty {
+    font-size: 18px;
+    color: rgb(170, 176, 190);
+    padding: 8px;
+}
+
+.report-text {
+    font-size: 22px;
+    white-space: normal;
+    margin: 8px 0 18px 0;
+    max-width: 640px;
+}
