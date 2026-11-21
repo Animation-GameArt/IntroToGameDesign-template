@@ -5,16 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Exercises/Ex01_Bootstrap.unity
     guid: 8d1045eedf33cc54bb3aebcfc8dea935
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Exercises/Ex02_Events.unity
     guid: a9df497e569d05940850ecca7d6f05e0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Exercises/Ex01_SceneB.unity
     guid: 5e665cdcc4f94f440a5ad7c034444caa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Exercises/Ex04_Level.unity
     guid: 7ee45bcd3d598ef4c89f32a3fdf7f1d8
   - enabled: 1
