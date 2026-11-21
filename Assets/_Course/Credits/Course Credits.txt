@@ -1,7 +1,13 @@
 COURSE MATERIALS
 
 Course scripts and project template
-Intro to Game Design, Collin College
+by J. Marshall Pittman
+Assisted by Claude.ai
+
+GAME 1303 Introduction to Game Design & Development
+Animation & Game Art program
+Collin College
+
 License: CC0 1.0 Universal
 
 Liberation Sans font
