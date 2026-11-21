@@ -1,0 +1,136 @@
+/*
+   Styles for the Management Kit's screen. To change them for your own game,
+   copy this file and ManagementHUD.uxml into Assets/_Game, and edit your copies.
+*/
+
+.mgmt-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 20px 24px;
+}
+
+.mgmt-body {
+    flex-grow: 1;
+    flex-direction: row;
+    margin-top: 12px;
+}
+
+.mgmt-left {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-right: 20px;
+}
+
+.mgmt-right {
+    width: 420px;
+}
+
+.mgmt-panel {
+    background-color: rgba(26, 30, 40, 0.9);
+    border-radius: 12px;
+    padding: 14px 18px;
+}
+
+.report-label {
+    flex-grow: 1;
+    font-size: 20px;
+    color: rgb(225, 230, 240);
+    white-space: normal;
+}
+
+.end-turn {
+    height: 64px;
+    margin-top: 12px;
+    font-size: 26px;
+}
+
+.build-grid {
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.build-row {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.build-plot {
+    width: 120px;
+    height: 120px;
+    margin: 6px;
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    background-color: rgba(80, 110, 70, 0.55);
+    -unity-background-scale-mode: scale-to-fit;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.build-plot--filled {
+    background-color: rgba(120, 100, 70, 0.8);
+}
+
+.build-plot--target {
+    border-color: rgb(255, 214, 102);
+    border-width: 4px;
+}
+
+.building-palette {
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 12px;
+    min-height: 140px;
+}
+
+.building-card {
+    width: 130px;
+    margin: 0 6px;
+    padding: 8px;
+    align-items: center;
+    background-color: rgb(52, 60, 82);
+    border-radius: 10px;
+}
+
+.building-card--unaffordable {
+    opacity: 0.4;
+}
+
+.building-icon {
+    width: 64px;
+    height: 64px;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.building-name {
+    font-size: 18px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}
+
+.building-cost {
+    font-size: 15px;
+    color: rgb(255, 214, 102);
+}
+
+.building-ghost {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    opacity: 0.8;
+    -unity-background-scale-mode: scale-to-fit;
+    background-color: rgba(52, 60, 82, 0.6);
+    border-radius: 10px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.event-text {
+    font-size: 22px;
+    white-space: normal;
+    margin: 8px 0 16px 0;
+    color: rgb(225, 230, 240);
+}

@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/Management/UI/ManagementUI.uss" />
+    <ui:VisualElement name="mgmt-root" class="mgmt-root" picking-mode="Ignore">
+        <ui:VisualElement name="hud" class="hud" picking-mode="Ignore">
+            <ui:Label name="turn-label" text="Year 1" class="hud-label" picking-mode="Ignore" />
+            <ui:Label name="resource-1-label" text="People: 0" class="hud-label" picking-mode="Ignore" />
+            <ui:Label name="resource-2-label" text="Food: 0" class="hud-label" picking-mode="Ignore" />
+            <ui:Label name="resource-3-label" text="Land: 0" class="hud-label" picking-mode="Ignore" />
+            <ui:Label name="resource-4-label" text="Gold: 0" class="hud-label" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement class="mgmt-body" picking-mode="Ignore">
+            <ui:VisualElement class="mgmt-left mgmt-panel">
+                <ui:VisualElement name="build-grid" class="build-grid" picking-mode="Ignore" />
+                <ui:VisualElement name="building-palette" class="building-palette" />
+            </ui:VisualElement>
+            <ui:VisualElement class="mgmt-right" picking-mode="Ignore">
+                <ui:VisualElement class="mgmt-panel" style="flex-grow: 1;">
+                    <ui:Label name="report-label" text="Drag buildings onto the plots, then end the turn." class="report-label" />
+                </ui:VisualElement>
+                <ui:Button name="end-turn-button" text="End Turn" class="menu-button end-turn" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="event-panel" class="screen screen--overlay">
+        <ui:VisualElement class="panel">
+            <ui:Label name="event-title" text="An Event" class="title" />
+            <ui:Label name="event-text" text="Something happened." class="event-text" />
+            <ui:VisualElement name="event-choices" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

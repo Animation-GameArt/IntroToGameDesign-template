@@ -38,7 +38,7 @@ Sound packs are in the `audio` folder.
 
 ## In this folder
 
-Pixel Platformer, Tiny Dungeon, Tiny Town, Physics Assets, Puzzle Pack 2, Space Shooter Remastered, Pixel Shmup, Sokoban (`kenney_sokoban-pack`, default size only) and Pixel UI Pack, and the sound packs above. Still to download for later kits: Tower Defense (top-down) and Playing Cards Pack.
+Pixel Platformer, Tiny Dungeon, Tiny Town, Physics Assets, Puzzle Pack 2, Space Shooter Remastered, Pixel Shmup, Sokoban (`kenney_sokoban-pack`), Tower Defense (top-down) and Pixel UI Pack, each at default size only, and the sound packs above. Still to download for later kits: Playing Cards Pack.
 
 If a link doesn't open, search for the pack's name at kenney.nl. The pages are free; the "Continue without donating" link downloads the ZIP.
 
