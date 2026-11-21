@@ -1,0 +1,18 @@
+{
+    "name": "CollinGame.Kits.TopDownAdventure",
+    "rootNamespace": "CollinGame.Kits.TopDownAdventure",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.TwoD",
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

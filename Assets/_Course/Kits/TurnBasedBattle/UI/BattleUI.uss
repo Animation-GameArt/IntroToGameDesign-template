@@ -1,0 +1,104 @@
+/*
+   Styles for the Turn-Based Battle Kit's battle screen. To change them for
+   your own game, copy this file and BattleUI.uxml into Assets/_Game, and
+   edit your copies.
+*/
+
+.battle-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: space-between;
+    padding: 20px 28px;
+}
+
+.battle-status {
+    align-self: center;
+    font-size: 30px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+    padding: 8px 20px;
+    background-color: rgba(10, 12, 18, 0.6);
+    border-radius: 8px;
+}
+
+.battle-bottom {
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.battle-log {
+    flex-grow: 1;
+    flex-basis: 0;
+    min-height: 150px;
+    margin-right: 20px;
+    padding: 14px 20px;
+    background-color: rgba(18, 20, 28, 0.85);
+    border-radius: 12px;
+}
+
+.battle-log-text {
+    font-size: 22px;
+    color: rgb(225, 230, 240);
+    white-space: normal;
+    -unity-text-align: lower-left;
+}
+
+.battle-menu {
+    width: 460px;
+    padding: 16px 20px;
+    background-color: rgb(38, 44, 60);
+    border-radius: 12px;
+    border-width: 2px;
+    border-color: rgb(90, 104, 140);
+}
+
+.battle-actor {
+    font-size: 26px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 102);
+    margin-bottom: 8px;
+}
+
+.battle-description {
+    font-size: 18px;
+    color: rgb(190, 198, 215);
+    white-space: normal;
+    min-height: 44px;
+    margin-bottom: 8px;
+}
+
+.battle-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.battle-button {
+    width: 200px;
+    height: 52px;
+    margin: 4px;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(58, 66, 92);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.battle-button:hover {
+    background-color: rgb(78, 88, 120);
+}
+
+.battle-button:focus {
+    border-color: rgb(255, 214, 102);
+}
+
+.battle-button:disabled {
+    color: rgb(130, 136, 150);
+}
+
+.battle-button--back {
+    background-color: rgb(46, 50, 64);
+}

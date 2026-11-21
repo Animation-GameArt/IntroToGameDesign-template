@@ -1,0 +1,18 @@
+{
+    "name": "CollinGame.Kits.ArcadeClassic",
+    "rootNamespace": "CollinGame.Kits.ArcadeClassic",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.TwoD",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

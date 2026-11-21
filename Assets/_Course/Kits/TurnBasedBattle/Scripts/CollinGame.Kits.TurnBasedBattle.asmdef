@@ -1,0 +1,17 @@
+{
+    "name": "CollinGame.Kits.TurnBasedBattle",
+    "rootNamespace": "CollinGame.Kits.TurnBasedBattle",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.TwoD"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

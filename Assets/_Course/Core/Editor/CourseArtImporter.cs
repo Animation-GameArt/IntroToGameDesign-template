@@ -32,6 +32,14 @@ namespace CollinGame.EditorTools
         static readonly Pack[] packs =
         {
             new Pack("Assets/_Course/Art/Kenney/kenney_pixel-platformer/", 18, true),
+
+            // Packs for the other kits. Each folder is named as Kenney's download is named.
+            // Check the pixels per unit when each pack is first added.
+            new Pack("Assets/_Course/Art/Kenney/kenney_tiny-dungeon/", 16, true),
+            new Pack("Assets/_Course/Art/Kenney/kenney_tiny-town/", 16, true),
+            new Pack("Assets/_Course/Art/Kenney/kenney_physics-assets/", 70, false),
+            new Pack("Assets/_Course/Art/Kenney/kenney_puzzle-pack/", 64, false),
+            new Pack("Assets/_Course/Art/Kenney/kenney_space-shooter-redux/", 100, false),
         };
 
         static bool reapplying;
