@@ -9,6 +9,6 @@ namespace CollinGame.Core
         /// The version of the course scripts in this project.
         /// Keep this the same as Assets/_Course/VERSION.txt.
         /// </summary>
-        public const string Version = "0.13.1";
+        public const string Version = "0.14.0";
     }
 }

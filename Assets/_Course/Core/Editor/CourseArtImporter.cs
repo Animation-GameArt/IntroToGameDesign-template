@@ -40,6 +40,7 @@ namespace CollinGame.EditorTools
             new Pack("Assets/_Course/Art/Kenney/kenney_physics-assets/", 70, false),
             new Pack("Assets/_Course/Art/Kenney/kenney_puzzle-pack/", 64, false),
             new Pack("Assets/_Course/Art/Kenney/kenney_space-shooter-redux/", 100, false),
+            new Pack("Assets/_Course/Art/Kenney/kenney_pixel-shmup/", 16, true),
         };
 
         static bool reapplying;
