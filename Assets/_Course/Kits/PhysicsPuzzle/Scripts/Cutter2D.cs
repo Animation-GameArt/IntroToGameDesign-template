@@ -52,9 +52,7 @@ namespace CollinGame.Kits.PhysicsPuzzle
             }
 
             // Everything crossed since the last frame, including triggers.
-            ContactFilter2D filter = new ContactFilter2D();
-            filter.useTriggers = true;
-            filter.NoFilter();
+            ContactFilter2D filter = ContactFilter2D.noFilter;
 
             int count = Physics2D.Linecast(lastPosition, position, filter, hits);
 

@@ -141,7 +141,7 @@ namespace CollinGame.Kits.TopDownAdventure
             ShowSwing(direction);
             onSwing?.Invoke();
 
-            int count = Physics2D.OverlapCircle(center, radius, new ContactFilter2D().NoFilter(), Hits);
+            int count = Physics2D.OverlapCircle(center, radius, ContactFilter2D.noFilter, Hits);
             int hitCount = 0;
 
             for (int i = 0; i < count && hitCount < AlreadyHit.Length; i++)
