@@ -1,11 +1,12 @@
 GAME TITLE
 
-Design, art and programming
+Design, art, and programming
 Your Name
 
-Made for GAME 1303 Intro to Game Design
+Made for GAME 1303 Intro to Game Design & Development
+Animation & Game Art program
 Collin College
-
+Professor: J. Marshall Pittman
 
 ASSETS
 
