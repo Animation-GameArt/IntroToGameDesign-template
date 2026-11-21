@@ -8,8 +8,27 @@ Liberation Sans font
 Included with TextMeshPro
 License: SIL Open Font License 1.1
 
-Pixel Platformer art pack
-Kenney (www.kenney.nl)
+Art packs by Kenney (www.kenney.nl)
+Pixel Platformer
+Tiny Dungeon
+Tiny Town
+Physics Assets
+Puzzle Pack 2
+Space Shooter Remastered
+Pixel UI Pack
+License: CC0 1.0 Universal
+
+Sound packs by Kenney (www.kenney.nl)
+Interface Sounds
+UI Audio
+Impact Sounds
+Digital Audio
+Sci-Fi Sounds
+RPG Audio
+Casino Audio
+Music Jingles
+Voiceover Pack
+Voiceover Pack: Fighter
 License: CC0 1.0 Universal
 
 Built with Unity

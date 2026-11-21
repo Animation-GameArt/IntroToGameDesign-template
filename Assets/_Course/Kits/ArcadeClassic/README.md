@@ -8,7 +8,7 @@ Scripts, UI and three tiny sample games for single-screen arcade games: **Breako
 | `UI/` | The kit's HUD: score, lives and a two-player score |
 | `Sample/` | The three sample games: scenes, prefabs and data |
 
-The kit uses the course's Core scripts, and Kenney's Puzzle Pack and Space Shooter Redux art packs (CC0) in `Assets/_Course/Art/Kenney`.
+The kit uses the course's Core scripts, and Kenney's Puzzle Pack 2 and Space Shooter Remastered art packs (CC0) in `Assets/_Course/Art/Kenney`.
 
 Like everything in `_Course`, don't edit these files. To change a prefab or a screen for your own game, copy it into `Assets/_Game` and edit the copy.
 
