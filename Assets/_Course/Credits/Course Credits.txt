@@ -19,6 +19,7 @@ Pixel Shmup
 Sokoban
 Tower Defense (top-down)
 Pixel UI Pack
+Playing Cards Pack
 License: CC0 1.0 Universal
 
 Sound packs by Kenney (www.kenney.nl)

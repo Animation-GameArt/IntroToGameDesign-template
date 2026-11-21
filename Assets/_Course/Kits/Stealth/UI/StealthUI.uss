@@ -1,0 +1,105 @@
+/*
+   Styles for the Stealth Kit's HUD. To change them for your own game, copy
+   this file and StealthHUD.uxml into Assets/_Game, and edit your copies.
+*/
+
+.stealth-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.stealth-top {
+    position: absolute;
+    top: 18px;
+    left: 0;
+    right: 0;
+    align-items: center;
+}
+
+.state-label {
+    font-size: 24px;
+    -unity-font-style: bold;
+    color: rgb(220, 225, 235);
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: black;
+}
+
+.state--danger {
+    color: rgb(255, 80, 70);
+}
+
+.state--hidden {
+    color: rgb(120, 200, 255);
+}
+
+.alert-bar {
+    width: 260px;
+    height: 12px;
+    margin-top: 6px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.alert-fill {
+    height: 100%;
+    width: 0;
+    background-color: rgb(255, 170, 40);
+}
+
+.alert-fill--chase {
+    background-color: rgb(255, 60, 50);
+}
+
+.objective-label {
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    font-size: 22px;
+    color: white;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: black;
+}
+
+.stealth-message {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 120px;
+    -unity-text-align: middle-center;
+    font-size: 24px;
+    color: rgb(255, 240, 200);
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: black;
+}
+
+.battery-bar {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.battery-text {
+    font-size: 18px;
+    color: rgb(220, 225, 235);
+    margin-right: 8px;
+}
+
+.battery-track {
+    width: 140px;
+    height: 14px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.battery-fill {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(140, 230, 120);
+}

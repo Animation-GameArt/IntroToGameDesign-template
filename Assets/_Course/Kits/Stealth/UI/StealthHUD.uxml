@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/Stealth/UI/StealthUI.uss" />
+    <ui:VisualElement name="stealth-root" class="stealth-root" picking-mode="Ignore">
+        <ui:VisualElement class="stealth-top" picking-mode="Ignore">
+            <ui:Label name="state-label" text="Unseen" class="state-label" picking-mode="Ignore" />
+            <ui:VisualElement name="alert-bar" class="alert-bar" picking-mode="Ignore">
+                <ui:VisualElement name="alert-fill" class="alert-fill" picking-mode="Ignore" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Label name="objective-label" text="Find the keys: 0 / 3" class="objective-label" picking-mode="Ignore" />
+        <ui:Label name="message-label" text="" class="stealth-message" picking-mode="Ignore" />
+        <ui:VisualElement name="battery-bar" class="battery-bar" picking-mode="Ignore">
+            <ui:Label text="Battery" class="battery-text" picking-mode="Ignore" />
+            <ui:VisualElement class="battery-track" picking-mode="Ignore">
+                <ui:VisualElement name="battery-fill" class="battery-fill" picking-mode="Ignore" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

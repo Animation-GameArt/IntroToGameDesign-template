@@ -1,0 +1,219 @@
+/*
+   Styles for the Card Game Kit's battle screen. To change them for your own
+   game, copy this file and CardBattle.uxml into Assets/_Game, and edit your copies.
+*/
+
+.card-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(34, 92, 58);
+    padding: 16px 24px;
+}
+
+.card-top {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.card-battle-label {
+    font-size: 22px;
+    color: rgb(220, 235, 225);
+}
+
+.enemy-area {
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.enemy-intent {
+    font-size: 24px;
+    -unity-font-style: bold;
+    color: rgb(255, 160, 140);
+    margin-bottom: 6px;
+}
+
+.enemy-portrait {
+    width: 200px;
+    height: 200px;
+    -unity-background-scale-mode: scale-to-fit;
+    transition-property: opacity, scale;
+    transition-duration: 0.4s;
+}
+
+.enemy-portrait--defeated {
+    opacity: 0;
+    scale: 0.6 0.6;
+}
+
+.enemy-name {
+    font-size: 26px;
+    -unity-font-style: bold;
+    color: white;
+}
+
+.health-bar {
+    width: 260px;
+    height: 24px;
+    margin: 4px 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.health-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    transition-property: width;
+    transition-duration: 0.3s;
+}
+
+.health-fill--enemy {
+    background-color: rgb(205, 70, 70);
+}
+
+.health-fill--player {
+    background-color: rgb(80, 190, 110);
+}
+
+.health-text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    -unity-text-align: middle-center;
+    font-size: 16px;
+    color: white;
+}
+
+.block-label {
+    font-size: 18px;
+    color: rgb(150, 200, 255);
+    height: 24px;
+}
+
+.card-log {
+    -unity-text-align: middle-center;
+    font-size: 20px;
+    color: rgb(255, 240, 200);
+    height: 30px;
+}
+
+.player-area {
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+.player-stats {
+    width: 280px;
+    padding: 10px 14px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.player-title {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: white;
+}
+
+.energy-label {
+    font-size: 22px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 102);
+}
+
+.pile-label {
+    font-size: 16px;
+    color: rgb(200, 215, 205);
+}
+
+.hand {
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0 12px;
+}
+
+.hand--waiting {
+    opacity: 0.6;
+}
+
+.card-slot {
+    width: 150px;
+    margin: 0 6px;
+    align-items: center;
+    transition-property: translate, opacity;
+    transition-duration: 0.12s;
+}
+
+.card-slot:hover {
+    translate: 0 -18px;
+}
+
+.card-slot--unplayable {
+    opacity: 0.5;
+}
+
+.card-slot--unplayable:hover {
+    translate: 0 0;
+}
+
+/* The card picture. Kenney's cards are 64 x 64 pixels with the card in the middle. */
+.card {
+    width: 150px;
+    height: 150px;
+    -unity-background-scale-mode: scale-to-fit;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-name {
+    font-size: 16px;
+    -unity-font-style: bold;
+    color: rgb(40, 44, 60);
+    white-space: normal;
+    -unity-text-align: middle-center;
+    max-width: 90px;
+}
+
+.card-cost {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 34px;
+    height: 34px;
+    border-radius: 17px;
+    background-color: rgb(255, 214, 102);
+    color: rgb(40, 30, 10);
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}
+
+.card-text {
+    font-size: 16px;
+    color: white;
+    white-space: normal;
+    -unity-text-align: upper-center;
+    min-height: 42px;
+}
+
+.card-key {
+    font-size: 14px;
+    color: rgb(180, 200, 190);
+}
+
+.end-turn {
+    width: 180px;
+    height: 64px;
+    font-size: 24px;
+}

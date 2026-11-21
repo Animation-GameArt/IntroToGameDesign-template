@@ -1,0 +1,17 @@
+{
+    "name": "CollinGame.Kits.CardGame",
+    "rootNamespace": "CollinGame.Kits.CardGame",
+    "references": [
+        "CollinGame.Core",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

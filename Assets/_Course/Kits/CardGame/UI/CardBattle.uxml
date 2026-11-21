@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <Style src="/Assets/_Course/Kits/CardGame/UI/CardUI.uss" />
+    <ui:VisualElement name="card-root" class="card-root" picking-mode="Ignore">
+        <ui:VisualElement class="card-top" picking-mode="Ignore">
+            <ui:Label name="battle-label" text="Battle 1 of 3" class="card-battle-label" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement class="enemy-area" picking-mode="Ignore">
+            <ui:Label name="enemy-intent-label" text="Next: Attack 6" class="enemy-intent" picking-mode="Ignore" />
+            <ui:VisualElement name="enemy-portrait" class="enemy-portrait" picking-mode="Ignore" />
+            <ui:Label name="enemy-name" text="Enemy" class="enemy-name" picking-mode="Ignore" />
+            <ui:VisualElement class="health-bar" picking-mode="Ignore">
+                <ui:VisualElement name="enemy-health-fill" class="health-fill health-fill--enemy" picking-mode="Ignore" />
+                <ui:Label name="enemy-health-label" text="30 / 30" class="health-text" picking-mode="Ignore" />
+            </ui:VisualElement>
+            <ui:Label name="enemy-block-label" text="" class="block-label" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:Label name="log-label" text="" class="card-log" picking-mode="Ignore" />
+        <ui:VisualElement class="player-area" picking-mode="Ignore">
+            <ui:VisualElement class="player-stats" picking-mode="Ignore">
+                <ui:Label text="You" class="player-title" picking-mode="Ignore" />
+                <ui:VisualElement class="health-bar" picking-mode="Ignore">
+                    <ui:VisualElement name="player-health-fill" class="health-fill health-fill--player" picking-mode="Ignore" />
+                    <ui:Label name="player-health-label" text="40 / 40" class="health-text" picking-mode="Ignore" />
+                </ui:VisualElement>
+                <ui:Label name="player-block-label" text="" class="block-label" picking-mode="Ignore" />
+                <ui:Label name="energy-label" text="Energy 3 / 3" class="energy-label" picking-mode="Ignore" />
+                <ui:Label name="draw-label" text="Draw: 0" class="pile-label" picking-mode="Ignore" />
+                <ui:Label name="discard-label" text="Discard: 0" class="pile-label" picking-mode="Ignore" />
+            </ui:VisualElement>
+            <ui:VisualElement name="hand" class="hand" />
+            <ui:Button name="end-turn-button" text="End Turn" class="menu-button end-turn" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
