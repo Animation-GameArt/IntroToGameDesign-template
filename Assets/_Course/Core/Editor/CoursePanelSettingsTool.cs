@@ -11,10 +11,14 @@ namespace CollinGame.EditorTools
     ///
     ///   Collin Game > UI > Use Course Panel Settings in Open Scenes
     ///       sets it on every UI Document in the open scenes.
+    ///   Collin Game > UI > Use Course Panel Settings in All Scenes and Prefabs
+    ///       does the same in every scene and prefab in the project, and saves them.
     ///   Collin Game > UI > Repair Course Panel Settings
-    ///       creates the asset if it's missing, and puts back its settings.
+    ///       creates the asset if it's missing or broken, and puts back its settings.
     ///
     /// A new UI Document also gets it by itself, when its Panel Settings is empty.
+    /// And when a scene is played or built, any UI Document still without Panel
+    /// Settings gets it for that run, with a warning (see CoursePanelSettingsCheck).
     /// </summary>
     [InitializeOnLoad]
     public static class CoursePanelSettingsTool
@@ -73,6 +77,85 @@ namespace CollinGame.EditorTools
             Debug.Log($"Course Panel Settings: set on {changed} UI Document(s). {documents.Length - changed} already used it. Save the scene to keep the change.");
         }
 
+        [MenuItem("Collin Game/UI/Use Course Panel Settings in All Scenes and Prefabs")]
+        static void UseEverywhere()
+        {
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+            {
+                return;
+            }
+
+            PanelSettings settings = GetOrCreate();
+            string[] folders = { "Assets" };
+            int prefabsChanged = 0;
+            int scenesChanged = 0;
+
+            foreach (string guid in AssetDatabase.FindAssets("t:Prefab", folders))
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+
+                if (!path.StartsWith("Assets/"))
+                {
+                    continue;
+                }
+
+                GameObject root = PrefabUtility.LoadPrefabContents(path);
+
+                if (Assign(root.GetComponentsInChildren<UIDocument>(true), settings) > 0)
+                {
+                    PrefabUtility.SaveAsPrefabAsset(root, path);
+                    prefabsChanged++;
+                }
+
+                PrefabUtility.UnloadPrefabContents(root);
+            }
+
+            string startScene = EditorSceneManager.GetActiveScene().path;
+
+            foreach (string guid in AssetDatabase.FindAssets("t:Scene", folders))
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+                int changed = 0;
+
+                foreach (GameObject root in scene.GetRootGameObjects())
+                {
+                    changed += Assign(root.GetComponentsInChildren<UIDocument>(true), settings);
+                }
+
+                if (changed > 0)
+                {
+                    EditorSceneManager.SaveScene(scene);
+                    scenesChanged++;
+                }
+            }
+
+            if (!string.IsNullOrEmpty(startScene))
+            {
+                EditorSceneManager.OpenScene(startScene, OpenSceneMode.Single);
+            }
+
+            Debug.Log($"Course Panel Settings: fixed {prefabsChanged} prefab(s) and {scenesChanged} scene(s).");
+        }
+
+        /// <summary>Sets the course Panel Settings on documents that have none. Returns how many changed.</summary>
+        public static int Assign(UIDocument[] documents, PanelSettings settings)
+        {
+            int changed = 0;
+
+            foreach (UIDocument document in documents)
+            {
+                if (document.panelSettings == null)
+                {
+                    document.panelSettings = settings;
+                    EditorUtility.SetDirty(document);
+                    changed++;
+                }
+            }
+
+            return changed;
+        }
+
         [MenuItem("Collin Game/UI/Repair Course Panel Settings")]
         static void Repair()
         {
@@ -87,6 +170,19 @@ namespace CollinGame.EditorTools
         public static PanelSettings GetOrCreate()
         {
             PanelSettings settings = AssetDatabase.LoadAssetAtPath<PanelSettings>(PanelSettingsPath);
+
+            if (settings == null && System.IO.File.Exists(PanelSettingsPath))
+            {
+                // The file is there but Unity can't read it as Panel Settings. Write a
+                // good one over it, keeping its .meta (and so every reference to it).
+                PanelSettings rebuilt = ScriptableObject.CreateInstance<PanelSettings>();
+                rebuilt.name = "CoursePanelSettings";
+                ApplyCourseSettings(rebuilt);
+                UnityEditorInternal.InternalEditorUtility.SaveToSerializedFileAndForget(new Object[] { rebuilt }, PanelSettingsPath, true);
+                AssetDatabase.ImportAsset(PanelSettingsPath, ImportAssetOptions.ForceUpdate);
+                settings = AssetDatabase.LoadAssetAtPath<PanelSettings>(PanelSettingsPath);
+                Debug.LogWarning($"Course Panel Settings: {PanelSettingsPath} couldn't be read, so it was rebuilt.", settings);
+            }
 
             if (settings == null)
             {
