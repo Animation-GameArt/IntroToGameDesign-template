@@ -1,0 +1,152 @@
+/*
+   Styles for the Visual Novel Kit's screen. To change them for your own game,
+   copy this file and VisualNovel.uxml into Assets/_Game, and edit your copies.
+*/
+
+.vn-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.vn-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(38, 43, 64);
+    -unity-background-scale-mode: scale-and-crop;
+}
+
+/* Characters stand along the bottom, behind the dialogue box. */
+.vn-character {
+    position: absolute;
+    bottom: 0;
+    width: 34%;
+    height: 78%;
+    -unity-background-scale-mode: scale-to-fit;
+    background-position-y: bottom;
+    opacity: 0;
+    transition-property: opacity, -unity-background-image-tint-color;
+    transition-duration: 0.25s, 0.2s;
+}
+
+.vn-character--shown {
+    opacity: 1;
+}
+
+.vn-character--left {
+    left: 2%;
+}
+
+.vn-character--center {
+    left: 33%;
+}
+
+.vn-character--right {
+    right: 2%;
+}
+
+.vn-dialogue {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    bottom: 28px;
+    min-height: 190px;
+    padding: 18px 26px 14px 26px;
+    background-color: rgba(20, 22, 34, 0.92);
+    border-radius: 14px;
+    border-width: 2px;
+    border-color: rgb(110, 120, 160);
+}
+
+.vn-speaker {
+    position: absolute;
+    top: -22px;
+    left: 22px;
+    padding: 4px 16px;
+    font-size: 24px;
+    -unity-font-style: bold;
+    color: rgb(255, 214, 102);
+    background-color: rgb(20, 22, 34);
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: rgb(110, 120, 160);
+}
+
+.vn-line {
+    font-size: 26px;
+    color: rgb(235, 238, 245);
+    white-space: normal;
+    margin-top: 10px;
+    flex-grow: 1;
+}
+
+.vn-continue {
+    align-self: flex-end;
+    font-size: 18px;
+    color: rgb(170, 178, 205);
+}
+
+.vn-choices {
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: 250px;
+    align-items: stretch;
+}
+
+.vn-choice {
+    height: 56px;
+    margin: 6px 0;
+    font-size: 22px;
+    white-space: normal;
+}
+
+.vn-meters {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    width: 340px;
+}
+
+.vn-meter {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 4px 10px;
+    background-color: rgba(20, 22, 34, 0.8);
+    border-radius: 8px;
+}
+
+.vn-meter-name {
+    width: 90px;
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.vn-meter-bar {
+    flex-grow: 1;
+    height: 14px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.vn-meter-fill {
+    height: 100%;
+    width: 0;
+    border-radius: 7px;
+    transition-property: width;
+    transition-duration: 0.4s;
+}
+
+.vn-meter-number {
+    width: 60px;
+    font-size: 16px;
+    -unity-text-align: middle-right;
+    color: rgb(200, 205, 220);
+}

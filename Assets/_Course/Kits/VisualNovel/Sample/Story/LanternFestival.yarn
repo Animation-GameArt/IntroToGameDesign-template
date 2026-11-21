@@ -1,0 +1,99 @@
+title: Start
+---
+<<declare $ren = 0 as number>>
+<<declare $mika = 0 as number>>
+<<declare $helped_ren = false as bool>>
+<<background Square>>
+It's the night of the Lantern Festival, your first since moving to town.
+The square is full of light and noise. You don't know anyone yet.
+<<show Ren left>>
+Ren: Oh! Sorry, I almost walked right into you. You're new here, aren't you?
+-> "I am. Is it that obvious?"
+    <<set $ren = $ren + 1>>
+    Ren: Only because you're looking at everything like it's magic. Which it is.
+-> "No, I've lived here for years."
+    Ren: Really? Huh. I'd remember a face like that.
+    Ren: ...Okay, I'll stop teasing.
+<<show Mika right>>
+Mika: Ren, the lanterns won't hang themselves. Who's this?
+Ren: Someone new! Be nice.
+Mika: I'm always nice. I'm just busy.
+-> "Can I help with the lanterns?"
+    <<set $mika = $mika + 2>>
+    Mika: ...You can? Fine. Hold this ladder, and don't let go.
+-> "Ren was just showing me around."
+    <<set $ren = $ren + 1>>
+    Mika: Of course Ren was. Have fun.
+    <<hide Mika>>
+<<jump Stalls>>
+===
+
+title: Stalls
+---
+<<hide_all>>
+<<background Stalls>>
+Later, the food stalls open. The smell of grilled corn fills the street.
+<<show Ren center>>
+Ren: I lost my lantern ticket somewhere. Without it I can't send a lantern tonight.
+-> "Let's look for it together."
+    <<set $ren = $ren + 2>>
+    <<set $helped_ren = true>>
+    You search under the tables until you find it, stuck to a paper plate.
+    Ren: You're my hero. Seriously.
+-> "Maybe Mika has a spare?"
+    Ren: Maybe. I'll ask her later.
+<<hide Ren>>
+<<show Mika center>>
+Mika: There you are. The lantern on the bridge keeps going out.
+Mika: Everyone says it's bad luck. I say it's a bad wick.
+-> "Let's fix it before the countdown."
+    <<set $mika = $mika + 2>>
+    Mika: Now you're talking.
+-> "Bad luck sounds more fun."
+    <<set $mika = $mika - 1>>
+    Mika: Of course you'd think so.
+-> "Ren and I will fix it together." <<if $helped_ren>>
+    <<set $ren = $ren + 1>>
+    <<set $mika = $mika + 1>>
+    Mika: Fine. Just don't set anything on fire.
+<<jump Bridge>>
+===
+
+title: Bridge
+---
+<<hide_all>>
+<<background Bridge>>
+At midnight, everyone gathers on the bridge to send their lanterns up.
+Who will you stand beside?
+-> Ren <<if $ren >= 3>>
+    <<jump RenEnding>>
+-> Mika <<if $mika >= 3>>
+    <<jump MikaEnding>>
+-> "I'll watch from here."
+    <<jump AloneEnding>>
+===
+
+title: RenEnding
+---
+<<show Ren center>>
+Ren: I was hoping you'd pick me. Ready? On three.
+Your lanterns rise together, side by side, until you can't tell them apart.
+Ren: Same time next year?
+<<raise RenEnding>>
+===
+
+title: MikaEnding
+---
+<<show Mika center>>
+Mika: The bridge lantern stayed lit. Told you it was the wick.
+Mika: ...Thanks for staying. Most people get bored of me.
+The two of you watch the sky fill with light.
+<<raise MikaEnding>>
+===
+
+title: AloneEnding
+---
+You watch a thousand lanterns float over the river.
+Next year, maybe, you'll know someone to share it with.
+<<raise AloneEnding>>
+===
