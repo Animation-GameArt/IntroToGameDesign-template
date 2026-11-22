@@ -1,0 +1,21 @@
+{
+    "name": "CollinGame.Kits.PhysicsPuzzle.Editor",
+    "rootNamespace": "CollinGame.Kits.PhysicsPuzzle.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.TwoD",
+        "CollinGame.Kits.PhysicsPuzzle"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

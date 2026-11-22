@@ -10,6 +10,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -382,6 +383,169 @@ namespace CollinGame.EditorTools
             }
         }
 
+        // ---------------------------------------------------------------- 3D
+
+        /// <summary>
+        /// A Main Camera for a 3D scene, drawing with the Universal Renderer (renderer 1 in the
+        /// course's URP asset; renderer 0 is the 2D Renderer).
+        /// </summary>
+        public static Camera Camera3D(Vector3 position, Quaternion rotation, Color background)
+        {
+            GameObject go = new GameObject("Main Camera") { tag = "MainCamera" };
+            go.transform.SetPositionAndRotation(position, rotation);
+            Camera camera = go.AddComponent<Camera>();
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = background;
+            camera.nearClipPlane = 0.1f;
+            go.AddComponent<AudioListener>();
+
+            // Found by name, so Core's editor scripts don't need a reference to URP.
+            Type dataType = AppDomain.CurrentDomain.GetAssemblies()
+                .Select(assembly => assembly.GetType("UnityEngine.Rendering.Universal.UniversalAdditionalCameraData", false))
+                .FirstOrDefault(type => type != null);
+            Component data = dataType != null ? go.GetComponent(dataType) : null;
+
+            if (dataType != null && data == null)
+            {
+                data = go.AddComponent(dataType);
+            }
+
+            MethodInfo setRenderer = dataType?.GetMethod("SetRenderer", new[] { typeof(int) });
+
+            if (setRenderer != null)
+            {
+                setRenderer.Invoke(data, new object[] { 1 });
+            }
+            else
+            {
+                Debug.LogWarning("Sample build: couldn't set the camera's renderer. Set Main Camera → Rendering → Renderer to the Universal Renderer.");
+            }
+
+            return camera;
+        }
+
+        /// <summary>A Directional Light.</summary>
+        public static Light Sun(Color color, float intensity, Vector3 angles)
+        {
+            GameObject go = new GameObject("Directional Light");
+            go.transform.rotation = Quaternion.Euler(angles);
+            Light light = go.AddComponent<Light>();
+            light.type = LightType.Directional;
+            light.color = color;
+            light.intensity = intensity;
+            light.shadows = LightShadows.Soft;
+            return light;
+        }
+
+        /// <summary>A URP Lit material asset in a Sample subfolder, optionally glowing in its own color.</summary>
+        public Material LitMaterial(string folder, string materialName, Color color, bool glow = false)
+        {
+            Shader shader = Shader.Find("Universal Render Pipeline/Lit");
+
+            if (shader == null)
+            {
+                throw new SampleBuildProblem("Couldn't find the shader Universal Render Pipeline/Lit. Is URP installed?");
+            }
+
+            Material material = new Material(shader);
+            material.SetColor("_BaseColor", color);
+
+            if (glow)
+            {
+                material.EnableKeyword("_EMISSION");
+                material.SetColor("_EmissionColor", color);
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+            }
+
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.mat");
+            return material;
+        }
+
+        /// <summary>A see-through URP Unlit material asset, drawn on both sides.</summary>
+        public Material SeeThroughMaterial(string folder, string materialName, Color color)
+        {
+            Shader shader = Shader.Find("Universal Render Pipeline/Unlit");
+
+            if (shader == null)
+            {
+                throw new SampleBuildProblem("Couldn't find the shader Universal Render Pipeline/Unlit. Is URP installed?");
+            }
+
+            Material material = new Material(shader);
+            material.SetColor("_BaseColor", color);
+            material.SetFloat("_Surface", 1f);
+            material.SetFloat("_Blend", 0f);
+            material.SetFloat("_Cull", 0f);
+            material.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            material.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            material.SetFloat("_ZWrite", 0f);
+            material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            material.SetOverrideTag("RenderType", "Transparent");
+            material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.mat");
+            return material;
+        }
+
+        /// <summary>
+        /// A soft round shadow material (a blurred black circle), for blob shadows. Uses the
+        /// Sprites/Default shader, which is see-through without any extra settings.
+        /// </summary>
+        public Material ShadowMaterial(string folder, string materialName, float opacity)
+        {
+            string texturePath = $"{Folder(folder)}/{materialName}.png";
+            const int size = 64;
+            Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            Color32[] pixels = new Color32[size * size];
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float distance = Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), new Vector2(size / 2f, size / 2f)) / (size / 2f);
+                    pixels[y * size + x] = new Color32(255, 255, 255, (byte)(Mathf.Clamp01(1f - distance) * 255f));
+                }
+            }
+
+            texture.SetPixels32(pixels);
+            File.WriteAllBytes(texturePath, texture.EncodeToPNG());
+            Object.DestroyImmediate(texture);
+            AssetDatabase.ImportAsset(texturePath);
+
+            Material material = new Material(Shader.Find("Sprites/Default"));
+            material.mainTexture = Load<Texture2D>(texturePath);
+            material.color = new Color(0f, 0f, 0f, opacity);
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.mat");
+            return material;
+        }
+
+        /// <summary>One of Unity's basic shapes, placed, scaled and colored, with or without its collider.</summary>
+        public static GameObject Shape(PrimitiveType type, string objectName, Vector3 position, Vector3 scale, Material material,
+            Transform parent = null, bool keepCollider = true)
+        {
+            GameObject go = GameObject.CreatePrimitive(type);
+            go.name = objectName;
+
+            if (parent != null)
+            {
+                go.transform.SetParent(parent, false);
+            }
+
+            go.transform.localPosition = position;
+            go.transform.localScale = scale;
+
+            if (material != null)
+            {
+                go.GetComponent<Renderer>().sharedMaterial = material;
+            }
+
+            if (!keepCollider)
+            {
+                Object.DestroyImmediate(go.GetComponent<Collider>());
+            }
+
+            return go;
+        }
+
         // ---------------------------------------------------------------- Screens
 
         public UIDocument Document(GameObject go, string uxmlPath, int sortOrder) => Document(go, Load<VisualTreeAsset>(uxmlPath), sortOrder);
@@ -524,7 +688,8 @@ namespace CollinGame.EditorTools
         /// Credits and Quit, and a Variable Resetter that starts a new game on every visit.
         /// </summary>
         public void MenuScene(string sceneName, string title, string subtitle, string playScene, VariableBase[] newGame, Color background,
-            string howToPlay = null)
+            string howToPlay = null, (string name, string text)[] extraButtons = null, Action<GameObject, UIButtonEvents> customize = null,
+            string playText = null)
         {
             Scene scene = NewScene();
             Camera2D(new Vector3(0f, 0f, -10f), 5f, background);
@@ -554,6 +719,18 @@ namespace CollinGame.EditorTools
                 ("text=\"A game by Your Name\"", $"text=\"{Escape(subtitle)}\"")
             };
 
+            if (playText != null)
+            {
+                menuText.Add(("name=\"play-button\" text=\"Play\"", $"name=\"play-button\" text=\"{Escape(playText)}\""));
+            }
+
+            if (extraButtons != null)
+            {
+                // More buttons under Play (above How to Play), wired by customize.
+                string added = string.Concat(extraButtons.Select(x => $"<ui:Button name=\"{x.name}\" text=\"{Escape(x.text)}\" class=\"menu-button\" />\n        "));
+                menuText.Add(("<ui:Button name=\"settings-button\"", added + "<ui:Button name=\"settings-button\""));
+            }
+
             if (howToPlayScreen != null)
             {
                 // Add a How to Play button under Play.
@@ -565,9 +742,14 @@ namespace CollinGame.EditorTools
             Document(menu, uxml, 0);
             MakeScreen(menu, false, "play-button");
             SceneChanger play = menu.AddComponent<SceneChanger>();
-            Set(play, "sceneName", playScene);
+            Set(play, "sceneName", playScene ?? "");
             UIButtonEvents buttons = menu.AddComponent<UIButtonEvents>();
-            AddButton(buttons, "play-button", Call(play.Load));
+
+            // With no Play scene, customize wires Play.
+            if (!string.IsNullOrEmpty(playScene))
+            {
+                AddButton(buttons, "play-button", Call(play.Load));
+            }
             if (howToPlayScreen != null)
             {
                 AddButton(buttons, "how-to-play-button", Call(howToPlayScreen.Show));
@@ -584,6 +766,7 @@ namespace CollinGame.EditorTools
                 Set(resetter, "resetWhenSceneStarts", true);
             }
 
+            customize?.Invoke(menu, buttons);
             SaveScene(scene, sceneName);
         }
 
@@ -660,6 +843,162 @@ namespace CollinGame.EditorTools
             }
 
             return Load<Sprite>(path);
+        }
+
+        /// <summary>
+        /// A plain white circle sprite, one unit across, made once in Sample/Art. For balls,
+        /// dots and placeholder shapes; tint it with the Sprite Renderer's color.
+        /// </summary>
+        public Sprite WhiteCircle()
+        {
+            string path = $"{Folder("Art")}/Circle.png";
+
+            if (!File.Exists(path))
+            {
+                const int size = 64;
+                Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+                Color32[] pixels = new Color32[size * size];
+                float radius = size * 0.5f;
+
+                for (int y = 0; y < size; y++)
+                {
+                    for (int x = 0; x < size; x++)
+                    {
+                        float distance = Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), new Vector2(radius, radius));
+                        byte alpha = (byte)(Mathf.Clamp01(radius - distance) * 255f);
+                        pixels[y * size + x] = new Color32(255, 255, 255, alpha);
+                    }
+                }
+
+                texture.SetPixels32(pixels);
+                File.WriteAllBytes(path, texture.EncodeToPNG());
+                Object.DestroyImmediate(texture);
+                AssetDatabase.ImportAsset(path);
+
+                TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
+                importer.textureType = TextureImporterType.Sprite;
+                importer.spriteImportMode = SpriteImportMode.Single;
+                importer.spritePixelsPerUnit = size;
+                importer.filterMode = FilterMode.Bilinear;
+                importer.SaveAndReimport();
+            }
+
+            return Load<Sprite>(path);
+        }
+
+        /// <summary>A Physics Material 2D asset in a Sample subfolder.</summary>
+        public PhysicsMaterial2D PhysicsMaterial(string folder, string materialName, float friction, float bounciness)
+        {
+            PhysicsMaterial2D material = new PhysicsMaterial2D(materialName) { friction = friction, bounciness = bounciness };
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.physicsMaterial2D");
+            return material;
+        }
+
+        /// <summary>
+        /// Sets a sprite's image to Mesh Type Full Rect, which a Tiled Sprite Renderer needs to
+        /// repeat it cleanly, and returns the sprite.
+        /// </summary>
+        public static Sprite FullRect(Sprite sprite)
+        {
+            string path = AssetDatabase.GetAssetPath(sprite);
+            TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
+            TextureImporterSettings settings = new TextureImporterSettings();
+            importer.ReadTextureSettings(settings);
+
+            if (settings.spriteMeshType != SpriteMeshType.FullRect)
+            {
+                settings.spriteMeshType = SpriteMeshType.FullRect;
+                importer.SetTextureSettings(settings);
+                importer.SaveAndReimport();
+            }
+
+            return Load<Sprite>(path);
+        }
+
+        /// <summary>A sprite object drawn Tiled at a size, in the sprite's units (before scaling).</summary>
+        public static GameObject TiledSprite(string objectName, Sprite sprite, int order, Vector2 size)
+        {
+            GameObject go = SpriteObject(objectName, FullRect(sprite), order);
+            SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
+            renderer.drawMode = SpriteDrawMode.Tiled;
+            renderer.size = size;
+            return go;
+        }
+
+        /// <summary>A Tile asset in Sample/Tiles from a sprite, with a grid-sized collider if asked.</summary>
+        public Tile TileFrom(Sprite sprite, string tileName, bool solid = false, Color? color = null)
+        {
+            Tile tile = ScriptableObject.CreateInstance<Tile>();
+            tile.sprite = sprite;
+            tile.colliderType = solid ? Tile.ColliderType.Grid : Tile.ColliderType.None;
+            tile.color = color ?? Color.white;
+            AssetDatabase.CreateAsset(tile, $"{Folder("Tiles")}/{tileName}.asset");
+            return tile;
+        }
+
+        /// <summary>A Grid object, to hold Tilemaps.</summary>
+        public static GameObject GridObject(string objectName = "Grid") => new GameObject(objectName, typeof(Grid));
+
+        /// <summary>A Tilemap under a Grid, drawn at a sorting order. Solid adds a Tilemap Collider 2D merged into a Composite Collider 2D.</summary>
+        public static Tilemap TilemapObject(GameObject grid, string objectName, int order, bool solid = false)
+        {
+            GameObject go = new GameObject(objectName, typeof(Tilemap), typeof(TilemapRenderer));
+            go.transform.SetParent(grid.transform, false);
+            go.GetComponent<TilemapRenderer>().sortingOrder = order;
+
+            if (solid)
+            {
+                Rigidbody2D body = go.AddComponent<Rigidbody2D>();
+                body.bodyType = RigidbodyType2D.Static;
+                TilemapCollider2D collider = go.AddComponent<TilemapCollider2D>();
+                collider.compositeOperation = Collider2D.CompositeOperation.Merge;
+                go.AddComponent<CompositeCollider2D>();
+            }
+
+            return go.GetComponent<Tilemap>();
+        }
+
+        /// <summary>Adds a tag to Project Settings → Tags and Layers, if it isn't there yet.</summary>
+        public static void EnsureTag(string tag)
+        {
+            if (UnityEditorInternal.InternalEditorUtility.tags.Contains(tag))
+            {
+                return;
+            }
+
+            SerializedObject manager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+            SerializedProperty tags = manager.FindProperty("tags");
+            tags.InsertArrayElementAtIndex(tags.arraySize);
+            tags.GetArrayElementAtIndex(tags.arraySize - 1).stringValue = tag;
+            manager.ApplyModifiedPropertiesWithoutUndo();
+            Debug.Log($"Sample build: added the tag \"{tag}\" (Project Settings → Tags and Layers).");
+        }
+
+        /// <summary>A Rigidbody 2D.</summary>
+        public static Rigidbody2D Body2D(GameObject go, RigidbodyType2D type = RigidbodyType2D.Dynamic, float gravity = 0f)
+        {
+            Rigidbody2D body = go.AddComponent<Rigidbody2D>();
+            body.bodyType = type;
+            body.gravityScale = gravity;
+            return body;
+        }
+
+        /// <summary>A solid Box Collider 2D, the size of the sprite unless given.</summary>
+        public static BoxCollider2D Box(GameObject go, Vector2? size = null, Vector2? offset = null)
+        {
+            BoxCollider2D box = go.AddComponent<BoxCollider2D>();
+
+            if (size.HasValue)
+            {
+                box.size = size.Value;
+            }
+
+            if (offset.HasValue)
+            {
+                box.offset = offset.Value;
+            }
+
+            return box;
         }
 
         /// <summary>Saves changes made to a prefab instance in the scene, so they're kept as overrides.</summary>
