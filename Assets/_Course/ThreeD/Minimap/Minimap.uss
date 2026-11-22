@@ -1,0 +1,50 @@
+/* The top-down map from Minimap 3D. Change the size, place and border here. */
+
+.minimap-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* The small map, in the top-right corner. */
+.minimap-frame {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 220px;
+    height: 220px;
+    padding: 4px;
+    background-color: rgba(10, 12, 16, 0.85);
+    border-width: 2px;
+    border-color: rgba(220, 225, 235, 0.8);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* The big map, while Tab is held: most of the screen. */
+.minimap-frame--big {
+    top: 6%;
+    bottom: 6%;
+    left: 15%;
+    right: 15%;
+    width: auto;
+    height: auto;
+}
+
+.minimap-view {
+    flex-grow: 1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.minimap-hint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 2px;
+    -unity-text-align: middle-center;
+    font-size: 11px;
+    color: rgba(220, 225, 235, 0.7);
+}
