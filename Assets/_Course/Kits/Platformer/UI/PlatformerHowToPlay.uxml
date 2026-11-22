@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="Reach the gem at the end of each level.&#10;&#10;Move with the arrow keys or A and D, or the left stick. Jump with Space or the bottom face button: hold it for a higher jump.&#10;&#10;Land on a walker to defeat it. Spikes, flyers and the sides of walkers hurt you. Hearts heal you.&#10;&#10;Collect coins as you go. A key opens the lock that blocks your way.&#10;&#10;Touching a flag saves your place. You have 3 lives." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

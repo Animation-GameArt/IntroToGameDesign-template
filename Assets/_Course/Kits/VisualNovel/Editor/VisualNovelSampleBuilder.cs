@@ -133,7 +133,10 @@ namespace CollinGame.Kits.VisualNovel.EditorTools
             GameObject systemsPrefab = b.Prefab(root);
 
             // Part 5 — Scenes
-            b.MenuScene(MenuScene, "Lantern Festival", "Visual Novel Kit sample", GameScene, all, Hex("2B2547"));
+            b.MenuScene(MenuScene, "Lantern Festival", "A night at the lantern festival. Who will you share it with?", GameScene, all, Hex("2B2547"),
+                "Click, tap, or press Space to read on. When choices appear, pick one: what you say changes how Ren and Mika feel about you, shown in the bars at the top right.\n\n" +
+                "Some choices are locked until you've done something earlier. At midnight on the bridge, you can only stand with someone who likes you enough.\n\n" +
+                "There are three endings. Play again to find them all.");
 
             Scene game = NewScene();
             Camera2D(new Vector3(0f, 0f, -10f), 5f, Color.black);

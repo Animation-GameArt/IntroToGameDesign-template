@@ -168,7 +168,13 @@ namespace CollinGame.Kits.Management.EditorTools
             GameObject systemsPrefab = b.Prefab(root);
 
             // Part 6 — Scenes
-            b.MenuScene(MenuScene, "Ten Years", "Management Kit sample", GameScene, all, new Color(0.24f, 0.32f, 0.22f));
+            b.MenuScene(MenuScene, "Ten Years", "Lead a village through ten years: feed your people, build wisely, and weather what comes.",
+                GameScene, all, new Color(0.24f, 0.32f, 0.22f),
+                "Keep your village alive for ten years.\n\n" +
+                "Every year, each person eats 1 Food. If the Food runs out, people leave. When there's plenty of Food (30 or more), the village grows. Every 3 people pay 1 Gold in taxes.\n\n" +
+                "Drag a building card onto an empty plot to build it, if you can afford it. Farms make Food, Lumber Camps make Wood, Houses bring people, and Markets make Gold. Drag a building back onto the cards to remove it.\n\n" +
+                "Click End Turn to end the year, and read the report to see what changed. Sometimes something happens, and some events ask you to choose.\n\n" +
+                "If no one is left, the game is over.");
 
             Scene game = NewScene();
             Camera2D(new Vector3(0f, 0f, -10f), 5f, new Color(0.24f, 0.32f, 0.22f));
