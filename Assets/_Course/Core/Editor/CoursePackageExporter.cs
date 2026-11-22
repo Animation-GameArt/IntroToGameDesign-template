@@ -3,7 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace CollinGame.Core.Editor
+namespace CollinGame.EditorTools
 {
     /// <summary>
     /// Exports the course's .unitypackage files: CollinGame-Core (Core, 2D and

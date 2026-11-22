@@ -1,0 +1,20 @@
+{
+    "name": "CollinGame.Kits.TurnBasedBattle.Editor",
+    "rootNamespace": "CollinGame.Kits.TurnBasedBattle.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.Kits.TurnBasedBattle"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

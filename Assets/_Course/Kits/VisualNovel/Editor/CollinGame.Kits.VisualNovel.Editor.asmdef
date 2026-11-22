@@ -1,0 +1,22 @@
+{
+    "name": "CollinGame.Kits.VisualNovel.Editor",
+    "rootNamespace": "CollinGame.Kits.VisualNovel.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.Kits.VisualNovel",
+        "YarnSpinner.Unity",
+        "YarnSpinner.Unity.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,20 @@
+{
+    "name": "CollinGame.Kits.Management.Editor",
+    "rootNamespace": "CollinGame.Kits.Management.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.Kits.Management"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
