@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="end-screen" class="screen screen--overlay">
+        <ui:VisualElement class="panel">
+            <ui:Label name="title-label" text="Victory!" class="title" />
+            <ui:Label name="score-label" text="Score: 0" class="subtitle" />
+            <ui:Button name="play-again-button" text="Play Again" class="menu-button" />
+            <ui:Button name="menu-button" text="Main Menu" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
