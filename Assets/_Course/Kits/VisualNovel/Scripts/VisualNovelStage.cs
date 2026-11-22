@@ -97,16 +97,18 @@ namespace CollinGame.Kits.VisualNovel
                 return;
             }
 
-            runner.AddCommandHandler<string>("background", SetBackground);
-            runner.AddCommandHandler<string, string, string>("show", Show);
-            runner.AddCommandHandler<string, string>("mood", SetMood);
-            runner.AddCommandHandler<string>("hide", Hide);
-            runner.AddCommandHandler("hide_all", new Action(HideAll));
-            runner.AddCommandHandler<string>("sound", PlaySound);
-            runner.AddCommandHandler<string>("music", PlayMusic);
-            runner.AddCommandHandler("stop_music", new Action(StopMusic));
-            runner.AddCommandHandler<string>("raise", Raise);
-            runner.AddCommandHandler<string>("scene", LoadScene);
+            // The names come from the Commands list rather than being written in here, so Yarn
+            // Spinner's code generator doesn't make its own (mismatched) handlers for them.
+            runner.AddCommandHandler<string>(Commands[0], SetBackground);
+            runner.AddCommandHandler<string, string, string>(Commands[1], Show);
+            runner.AddCommandHandler<string, string>(Commands[2], SetMood);
+            runner.AddCommandHandler<string>(Commands[3], Hide);
+            runner.AddCommandHandler(Commands[4], new Action(HideAll));
+            runner.AddCommandHandler<string>(Commands[5], PlaySound);
+            runner.AddCommandHandler<string>(Commands[6], PlayMusic);
+            runner.AddCommandHandler(Commands[7], new Action(StopMusic));
+            runner.AddCommandHandler<string>(Commands[8], Raise);
+            runner.AddCommandHandler<string>(Commands[9], LoadScene);
         }
 
         void OnDestroy()
