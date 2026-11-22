@@ -392,28 +392,46 @@ namespace CollinGame.Kits.Platformer3D.EditorTools
                 MethodInfo sync = controllerType.GetMethod("SynchronizeControllers", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                 sync?.Invoke(controller, null);
 
-                FieldInfo listField = controllerType.GetField("Controllers", BindingFlags.Instance | BindingFlags.Public);
-                IList list = listField?.GetValue(controller) as IList;
+                // Controllers is a property (one entry per camera axis: Look Orbit X, Look Orbit Y, Orbit Scale).
+                IList list = controllerType.GetProperty("Controllers", BindingFlags.Instance | BindingFlags.Public)?.GetValue(controller) as IList;
 
                 if (look == null || list == null || list.Count == 0)
                 {
-                    Debug.Log("3D Platformer sample: the orbit camera uses Cinemachine's default look input. If the mouse doesn't turn it: " + manual);
+                    Debug.LogWarning("Couldn't connect the orbit camera to the mouse. " + manual);
                     return;
                 }
 
-                for (int i = 0; i < list.Count; i++)
-                {
-                    object item = list[i];
-                    FieldInfo inputField = item.GetType().GetField("Input");
-                    object reader = inputField?.GetValue(item);
-                    FieldInfo actionField = reader?.GetType().GetField("InputAction");
+                int connected = 0;
 
-                    if (actionField != null && actionField.GetValue(reader) == null)
+                foreach (object item in list)
+                {
+                    string axisName = item.GetType().GetField("Name")?.GetValue(item) as string ?? "";
+                    bool x = axisName.EndsWith("X");
+                    bool y = axisName.EndsWith("Y");
+
+                    if (!x && !y)
                     {
-                        actionField.SetValue(reader, look);
-                        inputField.SetValue(item, reader);
-                        list[i] = item;
+                        continue;
                     }
+
+                    object reader = item.GetType().GetField("Input")?.GetValue(item);
+                    FieldInfo actionField = reader?.GetType().GetField("InputAction");
+                    FieldInfo gainField = reader?.GetType().GetField("Gain");
+
+                    if (actionField == null)
+                    {
+                        continue;
+                    }
+
+                    actionField.SetValue(reader, look);
+                    // Moving the mouse up tilts the view up.
+                    gainField?.SetValue(reader, x ? 1f : -1f);
+                    connected++;
+                }
+
+                if (connected < 2)
+                {
+                    Debug.LogWarning("Connected only part of the orbit camera to the mouse. " + manual);
                 }
 
                 EditorUtility.SetDirty(controller);
