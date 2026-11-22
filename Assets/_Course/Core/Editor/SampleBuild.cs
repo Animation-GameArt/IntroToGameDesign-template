@@ -10,6 +10,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -524,7 +525,7 @@ namespace CollinGame.EditorTools
         /// Credits and Quit, and a Variable Resetter that starts a new game on every visit.
         /// </summary>
         public void MenuScene(string sceneName, string title, string subtitle, string playScene, VariableBase[] newGame, Color background,
-            string howToPlay = null)
+            string howToPlay = null, (string name, string text)[] extraButtons = null, Action<GameObject, UIButtonEvents> customize = null)
         {
             Scene scene = NewScene();
             Camera2D(new Vector3(0f, 0f, -10f), 5f, background);
@@ -561,13 +562,25 @@ namespace CollinGame.EditorTools
                     "<ui:Button name=\"how-to-play-button\" text=\"How to Play\" class=\"menu-button\" />\n        <ui:Button name=\"settings-button\""));
             }
 
+            if (extraButtons != null)
+            {
+                // More buttons under Play, wired by customize.
+                string added = string.Concat(extraButtons.Select(x => $"<ui:Button name=\"{x.name}\" text=\"{Escape(x.text)}\" class=\"menu-button\" />\n        "));
+                menuText.Add(("<ui:Button name=\"settings-button\"", added + "<ui:Button name=\"settings-button\""));
+            }
+
             VisualTreeAsset uxml = UxmlCopy(CoreUI + "MainMenu.uxml", sceneName, menuText.ToArray());
             Document(menu, uxml, 0);
             MakeScreen(menu, false, "play-button");
             SceneChanger play = menu.AddComponent<SceneChanger>();
-            Set(play, "sceneName", playScene);
+            Set(play, "sceneName", playScene ?? "");
             UIButtonEvents buttons = menu.AddComponent<UIButtonEvents>();
-            AddButton(buttons, "play-button", Call(play.Load));
+
+            // With no Play scene, customize wires Play.
+            if (!string.IsNullOrEmpty(playScene))
+            {
+                AddButton(buttons, "play-button", Call(play.Load));
+            }
             if (howToPlayScreen != null)
             {
                 AddButton(buttons, "how-to-play-button", Call(howToPlayScreen.Show));
@@ -584,6 +597,7 @@ namespace CollinGame.EditorTools
                 Set(resetter, "resetWhenSceneStarts", true);
             }
 
+            customize?.Invoke(menu, buttons);
             SaveScene(scene, sceneName);
         }
 
@@ -660,6 +674,39 @@ namespace CollinGame.EditorTools
             }
 
             return Load<Sprite>(path);
+        }
+
+        /// <summary>A Tile asset in Sample/Tiles from a sprite, with a grid-sized collider if asked.</summary>
+        public Tile TileFrom(Sprite sprite, string tileName, bool solid = false, Color? color = null)
+        {
+            Tile tile = ScriptableObject.CreateInstance<Tile>();
+            tile.sprite = sprite;
+            tile.colliderType = solid ? Tile.ColliderType.Grid : Tile.ColliderType.None;
+            tile.color = color ?? Color.white;
+            AssetDatabase.CreateAsset(tile, $"{Folder("Tiles")}/{tileName}.asset");
+            return tile;
+        }
+
+        /// <summary>A Grid object, to hold Tilemaps.</summary>
+        public static GameObject Grid(string objectName = "Grid") => new GameObject(objectName, typeof(Grid));
+
+        /// <summary>A Tilemap under a Grid, drawn at a sorting order. Solid adds a Tilemap Collider 2D merged into a Composite Collider 2D.</summary>
+        public static Tilemap TilemapObject(GameObject grid, string objectName, int order, bool solid = false)
+        {
+            GameObject go = new GameObject(objectName, typeof(Tilemap), typeof(TilemapRenderer));
+            go.transform.SetParent(grid.transform, false);
+            go.GetComponent<TilemapRenderer>().sortingOrder = order;
+
+            if (solid)
+            {
+                Rigidbody2D body = go.AddComponent<Rigidbody2D>();
+                body.bodyType = RigidbodyType2D.Static;
+                TilemapCollider2D collider = go.AddComponent<TilemapCollider2D>();
+                collider.compositeOperation = Collider2D.CompositeOperation.Merge;
+                go.AddComponent<CompositeCollider2D>();
+            }
+
+            return go.GetComponent<Tilemap>();
         }
 
         /// <summary>Saves changes made to a prefab instance in the scene, so they're kept as overrides.</summary>

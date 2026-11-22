@@ -1,0 +1,21 @@
+{
+    "name": "CollinGame.Kits.Farming.Editor",
+    "rootNamespace": "CollinGame.Kits.Farming.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.TwoD",
+        "CollinGame.Kits.Farming"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
