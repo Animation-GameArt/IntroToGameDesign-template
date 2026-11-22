@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/ThreeD/Minimap/Minimap.uss" />
+    <ui:VisualElement name="minimap-root" class="minimap-root" picking-mode="Ignore">
+        <ui:VisualElement name="minimap-frame" class="minimap-frame" picking-mode="Ignore">
+            <ui:VisualElement name="minimap-view" class="minimap-view" picking-mode="Ignore" />
+            <ui:Label name="minimap-hint" text="M: map   Tab: big map" class="minimap-hint" picking-mode="Ignore" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
