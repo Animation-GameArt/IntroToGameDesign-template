@@ -83,6 +83,7 @@ namespace CollinGame.Kits.Platformer3D.EditorTools
         {
             GameObject player = new GameObject("Player") { tag = "Player" };
             Shape(PrimitiveType.Capsule, "Body", new Vector3(0f, 1f, 0f), Vector3.one, k.Stone, player.transform, false);
+            Child(player, "Camera Target").transform.localPosition = new Vector3(0f, 1.4f, 0f);
             Shape(PrimitiveType.Cube, "Nose", new Vector3(0f, 1.5f, 0.45f), new Vector3(0.3f, 0.2f, 0.4f), k.Danger, player.transform, false);
 
             PlayerController3D controller = player.AddComponent<PlayerController3D>();
@@ -308,7 +309,7 @@ namespace CollinGame.Kits.Platformer3D.EditorTools
             KeepChanges(blob);
 
             // Part 4 — The orbit camera
-            OrbitCamera(player.transform, 7f);
+            OrbitCamera(player.transform.Find("Camera Target"), 7f);
 
             Place(k.Systems, Vector3.zero);
             b.SaveScene(scene, LevelName);
@@ -333,16 +334,35 @@ namespace CollinGame.Kits.Platformer3D.EditorTools
             cam.Follow = target;
             cam.LookAt = target;
 
+            // The target is the player's Camera Target, at head height, so the camera's
+            // obstacle checks start above the ground the player stands on.
             CinemachineOrbitalFollow orbit = go.AddComponent<CinemachineOrbitalFollow>();
             orbit.OrbitStyle = CinemachineOrbitalFollow.OrbitStyles.Sphere;
             orbit.Radius = radius;
-            orbit.TargetOffset = new Vector3(0f, 1.2f, 0f);
+            orbit.TargetOffset = Vector3.zero;
+            orbit.TrackerSettings.PositionDamping = new Vector3(0.3f, 0.3f, 0.3f);
             orbit.VerticalAxis.Range = new Vector2(-10f, 60f);
             orbit.VerticalAxis.Center = 20f;
             orbit.VerticalAxis.Value = 20f;
 
-            go.AddComponent<CinemachineRotationComposer>().TargetOffset = new Vector3(0f, 1.2f, 0f);
-            go.AddComponent<CinemachineDeoccluder>();
+            CinemachineRotationComposer composer = go.AddComponent<CinemachineRotationComposer>();
+            composer.TargetOffset = Vector3.zero;
+            composer.Damping = new Vector2(0.2f, 0.2f);
+
+            // Moves the camera in front of scenery that hides the player, ignoring the player
+            // themselves, and not for things that only pass between them for a moment.
+            CinemachineDeoccluder deoccluder = go.AddComponent<CinemachineDeoccluder>();
+            deoccluder.IgnoreTag = "Player";
+            deoccluder.MinimumDistanceFromTarget = 1f;
+            CinemachineDeoccluder.ObstacleAvoidance avoid = deoccluder.AvoidObstacles;
+            avoid.Enabled = true;
+            avoid.CameraRadius = 0.2f;
+            avoid.MinimumOcclusionTime = 0.2f;
+            avoid.Strategy = CinemachineDeoccluder.ObstacleAvoidance.ResolutionStrategy.PullCameraForward;
+            avoid.MaximumEffort = 4;
+            avoid.Damping = 0.6f;
+            avoid.DampingWhenOccluded = 0.2f;
+            deoccluder.AvoidObstacles = avoid;
             AddLookInput(go);
             return cam;
         }
