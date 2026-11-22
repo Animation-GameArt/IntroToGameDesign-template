@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="Find three keys hidden in the building, then get out through the exit in Security, without being caught.&#10;&#10;WASD or the left stick move; the mouse or right stick turn the camera. Shift sprints, but guards hear it. Ctrl or C crouches: slower, and quiet even right behind a guard.&#10;&#10;Stay out of the guards' vision cones. Yellow: calm. Orange: suspicious, it will come to look. Red: it has seen you, so break line of sight and hide.&#10;&#10;Hide in a locker, or crouch under a desk. Click to switch the flashlight on or off: it helps you see, but guards spot it from farther away, and the battery runs down.&#10;&#10;Esc pauses." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>
