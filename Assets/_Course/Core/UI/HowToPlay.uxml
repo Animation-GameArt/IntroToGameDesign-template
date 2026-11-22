@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="The goal, the controls, and the rules, in a few short lines." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -495,10 +495,12 @@ namespace CollinGame.EditorTools
         }
 
         /// <summary>
-        /// The menu scene: a title, Play (loading the first game scene), Settings, Credits
-        /// and Quit, and a Variable Resetter that starts a new game on every visit.
+        /// The menu scene: a title and a one-line tagline saying what the game is, Play
+        /// (loading the first game scene), How to Play (if there's text for it), Settings,
+        /// Credits and Quit, and a Variable Resetter that starts a new game on every visit.
         /// </summary>
-        public void MenuScene(string sceneName, string title, string subtitle, string playScene, VariableBase[] newGame, Color background)
+        public void MenuScene(string sceneName, string title, string subtitle, string playScene, VariableBase[] newGame, Color background,
+            string howToPlay = null)
         {
             Scene scene = NewScene();
             Camera2D(new Vector3(0f, 0f, -10f), 5f, background);
@@ -510,17 +512,43 @@ namespace CollinGame.EditorTools
             AddButton(credits.AddComponent<UIButtonEvents>(), "back-button", Call(creditsScreen.Hide));
 
             UIScreen settings = Settings(null, 2);
+            UIScreen howToPlayScreen = null;
+
+            if (!string.IsNullOrEmpty(howToPlay))
+            {
+                GameObject help = new GameObject("How to Play");
+                Document(help, UxmlCopy(CoreUI + "HowToPlay.uxml", sceneName + "HowToPlay",
+                    ("text=\"The goal, the controls, and the rules, in a few short lines.\"", $"text=\"{Escape(howToPlay)}\"")), 3);
+                howToPlayScreen = MakeScreen(help, true, "back-button");
+                AddButton(help.AddComponent<UIButtonEvents>(), "back-button", Call(howToPlayScreen.Hide));
+            }
 
             GameObject menu = new GameObject("Main Menu");
-            VisualTreeAsset uxml = UxmlCopy(CoreUI + "MainMenu.uxml", sceneName,
-                ("text=\"Game Title\"", $"text=\"{title}\""),
-                ("text=\"A game by Your Name\"", $"text=\"{subtitle}\""));
+            List<(string, string)> menuText = new List<(string, string)>
+            {
+                ("text=\"Game Title\"", $"text=\"{Escape(title)}\""),
+                ("text=\"A game by Your Name\"", $"text=\"{Escape(subtitle)}\"")
+            };
+
+            if (howToPlayScreen != null)
+            {
+                // Add a How to Play button under Play.
+                menuText.Add(("<ui:Button name=\"settings-button\"",
+                    "<ui:Button name=\"how-to-play-button\" text=\"How to Play\" class=\"menu-button\" />\n        <ui:Button name=\"settings-button\""));
+            }
+
+            VisualTreeAsset uxml = UxmlCopy(CoreUI + "MainMenu.uxml", sceneName, menuText.ToArray());
             Document(menu, uxml, 0);
             MakeScreen(menu, false, "play-button");
             SceneChanger play = menu.AddComponent<SceneChanger>();
             Set(play, "sceneName", playScene);
             UIButtonEvents buttons = menu.AddComponent<UIButtonEvents>();
             AddButton(buttons, "play-button", Call(play.Load));
+            if (howToPlayScreen != null)
+            {
+                AddButton(buttons, "how-to-play-button", Call(howToPlayScreen.Show));
+            }
+
             AddButton(buttons, "settings-button", Call(settings.Show));
             AddButton(buttons, "credits-button", Call(creditsScreen.Show));
             AddButton(buttons, "quit-button", Call(play.QuitGame));
@@ -612,6 +640,11 @@ namespace CollinGame.EditorTools
 
         /// <summary>Saves changes made to a prefab instance in the scene, so they're kept as overrides.</summary>
         public static void KeepChanges(Object component) => PrefabUtility.RecordPrefabInstancePropertyModifications(component);
+
+        /// <summary>Makes text safe inside a UXML attribute, keeping its line breaks.</summary>
+        public static string Escape(string text) => text
+            .Replace("&", "&amp;").Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;")
+            .Replace("\n", "&#10;");
 
         // ---------------------------------------------------------------- Wiring
 

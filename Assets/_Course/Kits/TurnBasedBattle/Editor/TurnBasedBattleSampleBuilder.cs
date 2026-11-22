@@ -153,7 +153,11 @@ namespace CollinGame.Kits.TurnBasedBattle.EditorTools
             GameObject systemsPrefab = b.Prefab(systemsRoot);
 
             // Part 4 — Menu first, so it's first in the Scene List
-            b.MenuScene(MenuScene, "Three Battles", "Turn-Based Battle Kit sample", "Battle_1", null, Backdrop);
+            b.MenuScene(MenuScene, "Three Battles", "Lead a small party through three battles, choosing every move.", "Battle_1", null, Backdrop,
+                "Win three battles.\n\n" +
+                "On each of your fighters' turns, choose an action from the menu, then a target. Slash is reliable. Power Strike hits harder, but can miss. Defend halves the damage you take until your next turn. Potion heals.\n\n" +
+                "From the second battle, the Healer joins you: Heal restores an ally's health. The Hero's Firestorm hits every enemy, once per battle.\n\n" +
+                "Damage is the action's power plus the fighter's Attack, minus the target's Defense. Your fighters start each battle at full health.");
 
             // Part 3 — Battles
             void Battle(string sceneName, (GameObject prefab, string name)[] party, (GameObject prefab, string name)[] foes)

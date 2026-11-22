@@ -120,7 +120,13 @@ namespace CollinGame.Kits.CardGame.EditorTools
             GameObject systemsPrefab = b.Prefab(root);
 
             // Part 5 — Scenes
-            b.MenuScene(MenuScene, "Suit Duel", "Card Game Kit sample", GameScene, new VariableBase[] { playerHealth }, new Color(0.13f, 0.36f, 0.23f));
+            b.MenuScene(MenuScene, "Suit Duel", "Play cards to deal damage, block, heal or gain energy, against ever stronger enemies.",
+                GameScene, new VariableBase[] { playerHealth }, new Color(0.13f, 0.36f, 0.23f),
+                "Win three battles in a row: a Slime, a Knight and a Demon.\n\n" +
+                "Each turn you draw five cards and get 3 energy. Click a card, or press its number, to play it. The number in its corner is its energy cost.\n\n" +
+                "Spades deal damage. Diamonds block: block stops damage until your next turn. Hearts heal. Clubs draw more cards, or give energy. The bigger the number on the card, the stronger it is.\n\n" +
+                "Above the enemy is what it will do next. Block when an attack is coming; attack when it isn't. Then press End Turn (or E, or Enter).\n\n" +
+                "Your health carries over between battles, and you heal 10 after each one.");
 
             Scene game = NewScene();
             Camera2D(new Vector3(0f, 0f, -10f), 5f, new Color(0.13f, 0.36f, 0.23f));

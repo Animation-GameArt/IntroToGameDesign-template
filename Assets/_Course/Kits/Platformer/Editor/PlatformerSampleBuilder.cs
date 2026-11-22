@@ -607,6 +607,12 @@ namespace CollinGame.Kits.Platformer.EditorTools
 
             UIScreen settingsScreen = MakeSettings(a, null, 2);
 
+            GameObject help = new GameObject("How to Play");
+            Document(a, help, KitUI + "PlatformerHowToPlay.uxml", 3);
+            UIScreen helpScreen = MakeScreen(help, true, "back-button");
+            UIButtonEvents helpButtons = help.AddComponent<UIButtonEvents>();
+            AddButton(helpButtons, "back-button", e => UnityEventTools.AddVoidPersistentListener(e, helpScreen.Hide));
+
             GameObject menu = new GameObject("Main Menu");
             Document(a, menu, KitUI + "PlatformerMenu.uxml", 0);
             MakeScreen(menu, false, "play-button");
@@ -614,6 +620,7 @@ namespace CollinGame.Kits.Platformer.EditorTools
             Set(play, "sceneName", Level1Scene);
             UIButtonEvents menuButtons = menu.AddComponent<UIButtonEvents>();
             AddButton(menuButtons, "play-button", e => UnityEventTools.AddVoidPersistentListener(e, play.Load));
+            AddButton(menuButtons, "how-to-play-button", e => UnityEventTools.AddVoidPersistentListener(e, helpScreen.Show));
             AddButton(menuButtons, "settings-button", e => UnityEventTools.AddVoidPersistentListener(e, settingsScreen.Show));
             AddButton(menuButtons, "credits-button", e => UnityEventTools.AddVoidPersistentListener(e, creditsScreen.Show));
             AddButton(menuButtons, "quit-button", e => UnityEventTools.AddVoidPersistentListener(e, play.QuitGame));
