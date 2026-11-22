@@ -97,19 +97,35 @@ namespace CollinGame.Kits.VisualNovel
                 return;
             }
 
-            // The names come from the Commands list rather than being written in here, so Yarn
-            // Spinner's code generator doesn't make its own (mismatched) handlers for them.
-#pragma warning disable YS1020 // Names on purpose not known at compile time (see above).
-            runner.AddCommandHandler<string>(Commands[0], SetBackground);
-            runner.AddCommandHandler<string, string, string>(Commands[1], Show);
-            runner.AddCommandHandler<string, string>(Commands[2], SetMood);
-            runner.AddCommandHandler<string>(Commands[3], Hide);
-            runner.AddCommandHandler(Commands[4], new Action(HideAll));
-            runner.AddCommandHandler<string>(Commands[5], PlaySound);
-            runner.AddCommandHandler<string>(Commands[6], PlayMusic);
-            runner.AddCommandHandler(Commands[7], new Action(StopMusic));
-            runner.AddCommandHandler<string>(Commands[8], Raise);
-            runner.AddCommandHandler<string>(Commands[9], LoadScene);
+            // Two Yarn Spinner 3 quirks shape this:
+            // - Its code generator makes its own handlers for command names written in as
+            //   text, so the names come from the Commands list instead.
+            // - It treats a handler that's one of this class's methods as a command on a named
+            //   object (<<show Ren>> would look for an object called "Ren"), so each command is a
+            //   small local function that calls the method. Local functions can keep the
+            //   optional parameters, so <<show Ren>> and <<show Ren left>> both work.
+            void BackgroundCommand(string backgroundName) => SetBackground(backgroundName);
+            void ShowCommand(string characterName, string mood = "", string position = "") => Show(characterName, mood, position);
+            void MoodCommand(string characterName, string mood) => SetMood(characterName, mood);
+            void HideCommand(string characterName) => Hide(characterName);
+            void HideAllCommand() => HideAll();
+            void SoundCommand(string soundName) => PlaySound(soundName);
+            void MusicCommand(string musicName) => PlayMusic(musicName);
+            void StopMusicCommand() => StopMusic();
+            void RaiseCommand(string eventName) => Raise(eventName);
+            void SceneCommand(string sceneName) => LoadScene(sceneName);
+
+#pragma warning disable YS1020 // The names are deliberately not known at compile time (see above).
+            runner.AddCommandHandler(Commands[0], (Action<string>)BackgroundCommand);
+            runner.AddCommandHandler(Commands[1], (Action<string, string, string>)ShowCommand);
+            runner.AddCommandHandler(Commands[2], (Action<string, string>)MoodCommand);
+            runner.AddCommandHandler(Commands[3], (Action<string>)HideCommand);
+            runner.AddCommandHandler(Commands[4], (Action)HideAllCommand);
+            runner.AddCommandHandler(Commands[5], (Action<string>)SoundCommand);
+            runner.AddCommandHandler(Commands[6], (Action<string>)MusicCommand);
+            runner.AddCommandHandler(Commands[7], (Action)StopMusicCommand);
+            runner.AddCommandHandler(Commands[8], (Action<string>)RaiseCommand);
+            runner.AddCommandHandler(Commands[9], (Action<string>)SceneCommand);
 #pragma warning restore YS1020
         }
 
