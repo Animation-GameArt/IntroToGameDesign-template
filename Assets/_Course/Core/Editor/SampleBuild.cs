@@ -237,6 +237,7 @@ namespace CollinGame.EditorTools
         public GameObject Prefab(GameObject go)
         {
             string path = $"{Folder("Prefabs")}/{go.name}.prefab";
+            FillPanelSettings(new[] { go }, go.name);
             GameObject saved = PrefabUtility.SaveAsPrefabAsset(go, path);
             Object.DestroyImmediate(go);
             prefabs[saved.name] = saved;
@@ -302,6 +303,7 @@ namespace CollinGame.EditorTools
         {
             Folder("Scenes");
             string path = ScenePath(sceneName);
+            FillPanelSettings(scene.GetRootGameObjects(), sceneName);
 
             if (!EditorSceneManager.SaveScene(scene, path))
             {
@@ -311,6 +313,28 @@ namespace CollinGame.EditorTools
             if (!scenes.Contains(path))
             {
                 scenes.Add(path);
+            }
+        }
+
+        // A last check before saving: every UI Document gets the course Panel Settings,
+        // even if something cleared it while the scene was being built.
+        void FillPanelSettings(GameObject[] roots, string where)
+        {
+            if (Panel == null || EditorUtility.IsPersistent(Panel) == false)
+            {
+                Panel = CoursePanelSettingsTool.GetOrCreate();
+            }
+
+            int filled = 0;
+
+            foreach (GameObject root in roots)
+            {
+                filled += CoursePanelSettingsTool.Assign(root.GetComponentsInChildren<UIDocument>(true), Panel);
+            }
+
+            if (filled > 0)
+            {
+                Debug.Log($"{Title} sample: gave {filled} UI Document(s) in {where} the course Panel Settings before saving.");
             }
         }
 
