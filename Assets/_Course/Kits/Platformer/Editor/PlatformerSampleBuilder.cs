@@ -767,6 +767,14 @@ namespace CollinGame.Kits.Platformer.EditorTools
 
         static void Save(Scene scene, string sceneName)
         {
+            // A last check: every UI Document gets the course Panel Settings.
+            PanelSettings panel = CoursePanelSettingsTool.GetOrCreate();
+
+            foreach (GameObject root in scene.GetRootGameObjects())
+            {
+                CoursePanelSettingsTool.Assign(root.GetComponentsInChildren<UIDocument>(true), panel);
+            }
+
             if (!EditorSceneManager.SaveScene(scene, ScenePath(sceneName)))
             {
                 throw new BuildProblem($"Couldn't save {sceneName}.");
