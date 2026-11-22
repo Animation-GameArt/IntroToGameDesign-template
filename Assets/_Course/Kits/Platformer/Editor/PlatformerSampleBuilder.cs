@@ -411,6 +411,10 @@ namespace CollinGame.Kits.Platformer.EditorTools
             AddButton(pauseButtons, "restart-button", e => UnityEventTools.AddVoidPersistentListener(e, sceneChanger.ReloadScene));
             AddButton(pauseButtons, "menu-button", e => UnityEventTools.AddVoidPersistentListener(e, toMenu.Load));
 
+            // Settings, opened from the pause menu
+            UIScreen pauseSettings = MakeSettings(a, root.transform, 4);
+            AddButton(pauseButtons, "settings-button", e => UnityEventTools.AddVoidPersistentListener(e, pauseSettings.Show));
+
             // Level Complete
             GameObject complete = Child(root, "Level Complete");
             Document(a, complete, KitUI + "LevelComplete.uxml", 2);
@@ -601,6 +605,8 @@ namespace CollinGame.Kits.Platformer.EditorTools
             UIButtonEvents creditsButtons = credits.AddComponent<UIButtonEvents>();
             AddButton(creditsButtons, "back-button", e => UnityEventTools.AddVoidPersistentListener(e, creditsScreen.Hide));
 
+            UIScreen settingsScreen = MakeSettings(a, null, 2);
+
             GameObject menu = new GameObject("Main Menu");
             Document(a, menu, KitUI + "PlatformerMenu.uxml", 0);
             MakeScreen(menu, false, "play-button");
@@ -608,6 +614,7 @@ namespace CollinGame.Kits.Platformer.EditorTools
             Set(play, "sceneName", Level1Scene);
             UIButtonEvents menuButtons = menu.AddComponent<UIButtonEvents>();
             AddButton(menuButtons, "play-button", e => UnityEventTools.AddVoidPersistentListener(e, play.Load));
+            AddButton(menuButtons, "settings-button", e => UnityEventTools.AddVoidPersistentListener(e, settingsScreen.Show));
             AddButton(menuButtons, "credits-button", e => UnityEventTools.AddVoidPersistentListener(e, creditsScreen.Show));
             AddButton(menuButtons, "quit-button", e => UnityEventTools.AddVoidPersistentListener(e, play.QuitGame));
 
@@ -769,6 +776,24 @@ namespace CollinGame.Kits.Platformer.EditorTools
             document.panelSettings = a.panel;
             document.visualTreeAsset = Load<VisualTreeAsset>(uxmlPath);
             document.sortingOrder = sortOrder;
+        }
+
+        // A Settings screen (volume and full screen), hidden until shown, with Back hiding it.
+        static UIScreen MakeSettings(Assets a, Transform parent, int sortOrder)
+        {
+            GameObject settings = new GameObject("Settings");
+
+            if (parent != null)
+            {
+                settings.transform.SetParent(parent, false);
+            }
+
+            Document(a, settings, CoreUI + "Settings.uxml", sortOrder);
+            UIScreen screen = MakeScreen(settings, true, "music-slider");
+            settings.AddComponent<UISettings>();
+            UIButtonEvents buttons = settings.AddComponent<UIButtonEvents>();
+            AddButton(buttons, "back-button", e => UnityEventTools.AddVoidPersistentListener(e, screen.Hide));
+            return screen;
         }
 
         static UIScreen MakeScreen(GameObject go, bool hiddenAtStart, string selectWhenShown)
