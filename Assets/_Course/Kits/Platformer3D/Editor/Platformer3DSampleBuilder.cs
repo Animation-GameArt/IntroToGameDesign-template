@@ -30,7 +30,7 @@ namespace CollinGame.Kits.Platformer3D.EditorTools
 
         const string HowToPlay =
             "Cross the floating islands and touch the flag at the top of the tower.\n\n" +
-            "WASD or the left stick move, relative to the camera. The mouse or the right stick turn the camera. Space jumps (hold it to jump higher); Shift sprints.\n\n" +
+            "WASD or the left stick move, relative to the camera. The mouse or the right stick turn the camera. Space jumps (hold it to jump higher), and pressing it again in the air jumps once more; Shift sprints.\n\n" +
             "Moving platforms carry you; crumbling ones fall soon after you land. The red pad bounces you up high. Jump on the red cubes to defeat them; walking into them costs a heart.\n\n" +
             "Fall off, or lose every heart, and you start again from the last pole you touched. Collect all twenty coins if you can. Esc pauses.";
 
@@ -96,7 +96,7 @@ namespace CollinGame.Kits.Platformer3D.EditorTools
             Set(controller, "walkSpeed", 6f);
             Set(controller, "sprintSpeed", 9f);
             Set(controller, "jumpHeight", 2.2f);
-            Set(controller, "extraAirJumps", 0);
+            Set(controller, "extraAirJumps", 1);
             Set(controller, "canCrouch", false);
 
             Health health = player.AddComponent<Health>();
