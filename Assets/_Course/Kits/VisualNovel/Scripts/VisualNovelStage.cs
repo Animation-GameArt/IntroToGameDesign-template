@@ -99,6 +99,7 @@ namespace CollinGame.Kits.VisualNovel
 
             // The names come from the Commands list rather than being written in here, so Yarn
             // Spinner's code generator doesn't make its own (mismatched) handlers for them.
+#pragma warning disable YS1020 // Names on purpose not known at compile time (see above).
             runner.AddCommandHandler<string>(Commands[0], SetBackground);
             runner.AddCommandHandler<string, string, string>(Commands[1], Show);
             runner.AddCommandHandler<string, string>(Commands[2], SetMood);
@@ -109,6 +110,7 @@ namespace CollinGame.Kits.VisualNovel
             runner.AddCommandHandler(Commands[7], new Action(StopMusic));
             runner.AddCommandHandler<string>(Commands[8], Raise);
             runner.AddCommandHandler<string>(Commands[9], LoadScene);
+#pragma warning restore YS1020
         }
 
         void OnDestroy()

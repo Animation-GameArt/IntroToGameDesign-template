@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using CollinGame.Core;
 using CollinGame.EditorTools;
-using CollinGame.Kits.Platformer;
 using CollinGame.ThreeD;
 using Unity.Cinemachine;
 using UnityEditor;
