@@ -525,7 +525,8 @@ namespace CollinGame.EditorTools
         /// Credits and Quit, and a Variable Resetter that starts a new game on every visit.
         /// </summary>
         public void MenuScene(string sceneName, string title, string subtitle, string playScene, VariableBase[] newGame, Color background,
-            string howToPlay = null, (string name, string text)[] extraButtons = null, Action<GameObject, UIButtonEvents> customize = null)
+            string howToPlay = null, (string name, string text)[] extraButtons = null, Action<GameObject, UIButtonEvents> customize = null,
+            string playText = null)
         {
             Scene scene = NewScene();
             Camera2D(new Vector3(0f, 0f, -10f), 5f, background);
@@ -555,18 +556,23 @@ namespace CollinGame.EditorTools
                 ("text=\"A game by Your Name\"", $"text=\"{Escape(subtitle)}\"")
             };
 
+            if (playText != null)
+            {
+                menuText.Add(("name=\"play-button\" text=\"Play\"", $"name=\"play-button\" text=\"{Escape(playText)}\""));
+            }
+
+            if (extraButtons != null)
+            {
+                // More buttons under Play (above How to Play), wired by customize.
+                string added = string.Concat(extraButtons.Select(x => $"<ui:Button name=\"{x.name}\" text=\"{Escape(x.text)}\" class=\"menu-button\" />\n        "));
+                menuText.Add(("<ui:Button name=\"settings-button\"", added + "<ui:Button name=\"settings-button\""));
+            }
+
             if (howToPlayScreen != null)
             {
                 // Add a How to Play button under Play.
                 menuText.Add(("<ui:Button name=\"settings-button\"",
                     "<ui:Button name=\"how-to-play-button\" text=\"How to Play\" class=\"menu-button\" />\n        <ui:Button name=\"settings-button\""));
-            }
-
-            if (extraButtons != null)
-            {
-                // More buttons under Play, wired by customize.
-                string added = string.Concat(extraButtons.Select(x => $"<ui:Button name=\"{x.name}\" text=\"{Escape(x.text)}\" class=\"menu-button\" />\n        "));
-                menuText.Add(("<ui:Button name=\"settings-button\"", added + "<ui:Button name=\"settings-button\""));
             }
 
             VisualTreeAsset uxml = UxmlCopy(CoreUI + "MainMenu.uxml", sceneName, menuText.ToArray());
@@ -676,6 +682,55 @@ namespace CollinGame.EditorTools
             return Load<Sprite>(path);
         }
 
+        /// <summary>
+        /// A plain white circle sprite, one unit across, made once in Sample/Art. For balls,
+        /// dots and placeholder shapes; tint it with the Sprite Renderer's color.
+        /// </summary>
+        public Sprite WhiteCircle()
+        {
+            string path = $"{Folder("Art")}/Circle.png";
+
+            if (!File.Exists(path))
+            {
+                const int size = 64;
+                Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+                Color32[] pixels = new Color32[size * size];
+                float radius = size * 0.5f;
+
+                for (int y = 0; y < size; y++)
+                {
+                    for (int x = 0; x < size; x++)
+                    {
+                        float distance = Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), new Vector2(radius, radius));
+                        byte alpha = (byte)(Mathf.Clamp01(radius - distance) * 255f);
+                        pixels[y * size + x] = new Color32(255, 255, 255, alpha);
+                    }
+                }
+
+                texture.SetPixels32(pixels);
+                File.WriteAllBytes(path, texture.EncodeToPNG());
+                Object.DestroyImmediate(texture);
+                AssetDatabase.ImportAsset(path);
+
+                TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
+                importer.textureType = TextureImporterType.Sprite;
+                importer.spriteImportMode = SpriteImportMode.Single;
+                importer.spritePixelsPerUnit = size;
+                importer.filterMode = FilterMode.Bilinear;
+                importer.SaveAndReimport();
+            }
+
+            return Load<Sprite>(path);
+        }
+
+        /// <summary>A Physics Material 2D asset in a Sample subfolder.</summary>
+        public PhysicsMaterial2D PhysicsMaterial(string folder, string materialName, float friction, float bounciness)
+        {
+            PhysicsMaterial2D material = new PhysicsMaterial2D(materialName) { friction = friction, bounciness = bounciness };
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.physicsMaterial2D");
+            return material;
+        }
+
         /// <summary>A Tile asset in Sample/Tiles from a sprite, with a grid-sized collider if asked.</summary>
         public Tile TileFrom(Sprite sprite, string tileName, bool solid = false, Color? color = null)
         {
@@ -707,6 +762,49 @@ namespace CollinGame.EditorTools
             }
 
             return go.GetComponent<Tilemap>();
+        }
+
+        /// <summary>Adds a tag to Project Settings → Tags and Layers, if it isn't there yet.</summary>
+        public static void EnsureTag(string tag)
+        {
+            if (UnityEditorInternal.InternalEditorUtility.tags.Contains(tag))
+            {
+                return;
+            }
+
+            SerializedObject manager = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/TagManager.asset")[0]);
+            SerializedProperty tags = manager.FindProperty("tags");
+            tags.InsertArrayElementAtIndex(tags.arraySize);
+            tags.GetArrayElementAtIndex(tags.arraySize - 1).stringValue = tag;
+            manager.ApplyModifiedPropertiesWithoutUndo();
+            Debug.Log($"Sample build: added the tag \"{tag}\" (Project Settings → Tags and Layers).");
+        }
+
+        /// <summary>A Rigidbody 2D.</summary>
+        public static Rigidbody2D Body2D(GameObject go, RigidbodyType2D type = RigidbodyType2D.Dynamic, float gravity = 0f)
+        {
+            Rigidbody2D body = go.AddComponent<Rigidbody2D>();
+            body.bodyType = type;
+            body.gravityScale = gravity;
+            return body;
+        }
+
+        /// <summary>A solid Box Collider 2D, the size of the sprite unless given.</summary>
+        public static BoxCollider2D Box(GameObject go, Vector2? size = null, Vector2? offset = null)
+        {
+            BoxCollider2D box = go.AddComponent<BoxCollider2D>();
+
+            if (size.HasValue)
+            {
+                box.size = size.Value;
+            }
+
+            if (offset.HasValue)
+            {
+                box.offset = offset.Value;
+            }
+
+            return box;
         }
 
         /// <summary>Saves changes made to a prefab instance in the scene, so they're kept as overrides.</summary>
