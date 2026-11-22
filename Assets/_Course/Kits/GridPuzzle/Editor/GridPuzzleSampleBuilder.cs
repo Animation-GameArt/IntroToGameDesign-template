@@ -191,7 +191,7 @@ namespace CollinGame.Kits.GridPuzzle.EditorTools
             float size = Mathf.Max(height * 0.5f + 1f, (width * 0.5f + 1f) / (16f / 9f)) + 0.5f;
             Camera2D(new Vector3(width / 2f, height / 2f - 0.4f, -10f), size, Background);
 
-            GameObject grid = Grid();
+            GameObject grid = GridObject();
             Tilemap floor = TilemapObject(grid, "Floor", -10);
             Tilemap walls = TilemapObject(grid, "Walls", -1);
             GameObject things = new GameObject("Pieces");

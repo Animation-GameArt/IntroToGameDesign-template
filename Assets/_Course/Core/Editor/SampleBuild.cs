@@ -383,6 +383,169 @@ namespace CollinGame.EditorTools
             }
         }
 
+        // ---------------------------------------------------------------- 3D
+
+        /// <summary>
+        /// A Main Camera for a 3D scene, drawing with the Universal Renderer (renderer 1 in the
+        /// course's URP asset; renderer 0 is the 2D Renderer).
+        /// </summary>
+        public static Camera Camera3D(Vector3 position, Quaternion rotation, Color background)
+        {
+            GameObject go = new GameObject("Main Camera") { tag = "MainCamera" };
+            go.transform.SetPositionAndRotation(position, rotation);
+            Camera camera = go.AddComponent<Camera>();
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = background;
+            camera.nearClipPlane = 0.1f;
+            go.AddComponent<AudioListener>();
+
+            // Found by name, so Core's editor scripts don't need a reference to URP.
+            Type dataType = AppDomain.CurrentDomain.GetAssemblies()
+                .Select(assembly => assembly.GetType("UnityEngine.Rendering.Universal.UniversalAdditionalCameraData", false))
+                .FirstOrDefault(type => type != null);
+            Component data = dataType != null ? go.GetComponent(dataType) : null;
+
+            if (dataType != null && data == null)
+            {
+                data = go.AddComponent(dataType);
+            }
+
+            MethodInfo setRenderer = dataType?.GetMethod("SetRenderer", new[] { typeof(int) });
+
+            if (setRenderer != null)
+            {
+                setRenderer.Invoke(data, new object[] { 1 });
+            }
+            else
+            {
+                Debug.LogWarning("Sample build: couldn't set the camera's renderer. Set Main Camera → Rendering → Renderer to the Universal Renderer.");
+            }
+
+            return camera;
+        }
+
+        /// <summary>A Directional Light.</summary>
+        public static Light Sun(Color color, float intensity, Vector3 angles)
+        {
+            GameObject go = new GameObject("Directional Light");
+            go.transform.rotation = Quaternion.Euler(angles);
+            Light light = go.AddComponent<Light>();
+            light.type = LightType.Directional;
+            light.color = color;
+            light.intensity = intensity;
+            light.shadows = LightShadows.Soft;
+            return light;
+        }
+
+        /// <summary>A URP Lit material asset in a Sample subfolder, optionally glowing in its own color.</summary>
+        public Material LitMaterial(string folder, string materialName, Color color, bool glow = false)
+        {
+            Shader shader = Shader.Find("Universal Render Pipeline/Lit");
+
+            if (shader == null)
+            {
+                throw new SampleBuildProblem("Couldn't find the shader Universal Render Pipeline/Lit. Is URP installed?");
+            }
+
+            Material material = new Material(shader);
+            material.SetColor("_BaseColor", color);
+
+            if (glow)
+            {
+                material.EnableKeyword("_EMISSION");
+                material.SetColor("_EmissionColor", color);
+                material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+            }
+
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.mat");
+            return material;
+        }
+
+        /// <summary>A see-through URP Unlit material asset, drawn on both sides.</summary>
+        public Material SeeThroughMaterial(string folder, string materialName, Color color)
+        {
+            Shader shader = Shader.Find("Universal Render Pipeline/Unlit");
+
+            if (shader == null)
+            {
+                throw new SampleBuildProblem("Couldn't find the shader Universal Render Pipeline/Unlit. Is URP installed?");
+            }
+
+            Material material = new Material(shader);
+            material.SetColor("_BaseColor", color);
+            material.SetFloat("_Surface", 1f);
+            material.SetFloat("_Blend", 0f);
+            material.SetFloat("_Cull", 0f);
+            material.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.SrcAlpha);
+            material.SetFloat("_DstBlend", (float)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+            material.SetFloat("_ZWrite", 0f);
+            material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+            material.SetOverrideTag("RenderType", "Transparent");
+            material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.mat");
+            return material;
+        }
+
+        /// <summary>
+        /// A soft round shadow material (a blurred black circle), for blob shadows. Uses the
+        /// Sprites/Default shader, which is see-through without any extra settings.
+        /// </summary>
+        public Material ShadowMaterial(string folder, string materialName, float opacity)
+        {
+            string texturePath = $"{Folder(folder)}/{materialName}.png";
+            const int size = 64;
+            Texture2D texture = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            Color32[] pixels = new Color32[size * size];
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    float distance = Vector2.Distance(new Vector2(x + 0.5f, y + 0.5f), new Vector2(size / 2f, size / 2f)) / (size / 2f);
+                    pixels[y * size + x] = new Color32(255, 255, 255, (byte)(Mathf.Clamp01(1f - distance) * 255f));
+                }
+            }
+
+            texture.SetPixels32(pixels);
+            File.WriteAllBytes(texturePath, texture.EncodeToPNG());
+            Object.DestroyImmediate(texture);
+            AssetDatabase.ImportAsset(texturePath);
+
+            Material material = new Material(Shader.Find("Sprites/Default"));
+            material.mainTexture = Load<Texture2D>(texturePath);
+            material.color = new Color(0f, 0f, 0f, opacity);
+            AssetDatabase.CreateAsset(material, $"{Folder(folder)}/{materialName}.mat");
+            return material;
+        }
+
+        /// <summary>One of Unity's basic shapes, placed, scaled and colored, with or without its collider.</summary>
+        public static GameObject Shape(PrimitiveType type, string objectName, Vector3 position, Vector3 scale, Material material,
+            Transform parent = null, bool keepCollider = true)
+        {
+            GameObject go = GameObject.CreatePrimitive(type);
+            go.name = objectName;
+
+            if (parent != null)
+            {
+                go.transform.SetParent(parent, false);
+            }
+
+            go.transform.localPosition = position;
+            go.transform.localScale = scale;
+
+            if (material != null)
+            {
+                go.GetComponent<Renderer>().sharedMaterial = material;
+            }
+
+            if (!keepCollider)
+            {
+                Object.DestroyImmediate(go.GetComponent<Collider>());
+            }
+
+            return go;
+        }
+
         // ---------------------------------------------------------------- Screens
 
         public UIDocument Document(GameObject go, string uxmlPath, int sortOrder) => Document(go, Load<VisualTreeAsset>(uxmlPath), sortOrder);
@@ -731,6 +894,37 @@ namespace CollinGame.EditorTools
             return material;
         }
 
+        /// <summary>
+        /// Sets a sprite's image to Mesh Type Full Rect, which a Tiled Sprite Renderer needs to
+        /// repeat it cleanly, and returns the sprite.
+        /// </summary>
+        public static Sprite FullRect(Sprite sprite)
+        {
+            string path = AssetDatabase.GetAssetPath(sprite);
+            TextureImporter importer = (TextureImporter)AssetImporter.GetAtPath(path);
+            TextureImporterSettings settings = new TextureImporterSettings();
+            importer.ReadTextureSettings(settings);
+
+            if (settings.spriteMeshType != SpriteMeshType.FullRect)
+            {
+                settings.spriteMeshType = SpriteMeshType.FullRect;
+                importer.SetTextureSettings(settings);
+                importer.SaveAndReimport();
+            }
+
+            return Load<Sprite>(path);
+        }
+
+        /// <summary>A sprite object drawn Tiled at a size, in the sprite's units (before scaling).</summary>
+        public static GameObject TiledSprite(string objectName, Sprite sprite, int order, Vector2 size)
+        {
+            GameObject go = SpriteObject(objectName, FullRect(sprite), order);
+            SpriteRenderer renderer = go.GetComponent<SpriteRenderer>();
+            renderer.drawMode = SpriteDrawMode.Tiled;
+            renderer.size = size;
+            return go;
+        }
+
         /// <summary>A Tile asset in Sample/Tiles from a sprite, with a grid-sized collider if asked.</summary>
         public Tile TileFrom(Sprite sprite, string tileName, bool solid = false, Color? color = null)
         {
@@ -743,7 +937,7 @@ namespace CollinGame.EditorTools
         }
 
         /// <summary>A Grid object, to hold Tilemaps.</summary>
-        public static GameObject Grid(string objectName = "Grid") => new GameObject(objectName, typeof(Grid));
+        public static GameObject GridObject(string objectName = "Grid") => new GameObject(objectName, typeof(Grid));
 
         /// <summary>A Tilemap under a Grid, drawn at a sorting order. Solid adds a Tilemap Collider 2D merged into a Composite Collider 2D.</summary>
         public static Tilemap TilemapObject(GameObject grid, string objectName, int order, bool solid = false)

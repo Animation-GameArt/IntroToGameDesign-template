@@ -1,0 +1,22 @@
+{
+    "name": "CollinGame.Kits.EndlessRunner.Editor",
+    "rootNamespace": "CollinGame.Kits.EndlessRunner.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.TwoD",
+        "CollinGame.Kits.EndlessRunner",
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

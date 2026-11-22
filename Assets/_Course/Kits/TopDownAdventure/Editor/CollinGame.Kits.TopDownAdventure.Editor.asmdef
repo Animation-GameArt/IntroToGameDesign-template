@@ -1,0 +1,22 @@
+{
+    "name": "CollinGame.Kits.TopDownAdventure.Editor",
+    "rootNamespace": "CollinGame.Kits.TopDownAdventure.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.TwoD",
+        "CollinGame.Kits.TopDownAdventure",
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -213,7 +213,7 @@ namespace CollinGame.Kits.Farming.EditorTools
             Tile fence = b.TileFrom(Town("tile_0045"), "Fence", true);
             Tile field = b.TileFrom(Town("tile_0000"), "Field Grass");
 
-            GameObject grid = Grid();
+            GameObject grid = GridObject();
             Tilemap ground = TilemapObject(grid, "Ground", 0);
             Tilemap farmland = TilemapObject(grid, "Farmland", 1);
             Tilemap soil = TilemapObject(grid, "Soil", 2);

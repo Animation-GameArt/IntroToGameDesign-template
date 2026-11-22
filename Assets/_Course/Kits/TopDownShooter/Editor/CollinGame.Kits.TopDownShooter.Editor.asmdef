@@ -1,0 +1,21 @@
+{
+    "name": "CollinGame.Kits.TopDownShooter.Editor",
+    "rootNamespace": "CollinGame.Kits.TopDownShooter.EditorTools",
+    "references": [
+        "CollinGame.Core",
+        "CollinGame.Core.Editor",
+        "CollinGame.TwoD",
+        "CollinGame.Kits.TopDownShooter"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
