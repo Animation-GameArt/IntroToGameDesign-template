@@ -84,6 +84,14 @@ namespace CollinGame.Kits.VisualNovel
         readonly VisualElement[] slots = new VisualElement[3];
         readonly CharacterData[] onStage = new CharacterData[3];
 
+        // The stage handles its commands itself rather than through Yarn Spinner's
+        // AddCommandHandler: in Yarn Spinner 3.3 that treats a stage method as a command on a
+        // named object (<<show Ren>> looks for an object called "Ren"), and quietly skips other
+        // kinds of handler. Instead the stage registers one plain handler, once, that sends
+        // the kit's commands to whichever stage is in the scene.
+        static VisualNovelStage current;
+        static bool registered;
+
         void Awake()
         {
             if (runner == null)
@@ -94,51 +102,66 @@ namespace CollinGame.Kits.VisualNovel
             if (runner == null)
             {
                 Debug.LogWarning($"Visual Novel Stage on \"{name}\": there is no Dialogue Runner in the scene, so the script's commands won't work.", this);
-                return;
             }
 
-            // Two Yarn Spinner 3 quirks shape this:
-            // - Its code generator makes its own handlers for command names written in as
-            //   text, so the names come from the Commands list instead.
-            // - It treats a handler that's one of this class's methods as a command on a named
-            //   object (<<show Ren>> would look for an object called "Ren"), so each command is a
-            //   small local function that calls the method. Local functions can keep the
-            //   optional parameters, so <<show Ren>> and <<show Ren left>> both work.
-            void BackgroundCommand(string backgroundName) => SetBackground(backgroundName);
-            void ShowCommand(string characterName, string mood = "", string position = "") => Show(characterName, mood, position);
-            void MoodCommand(string characterName, string mood) => SetMood(characterName, mood);
-            void HideCommand(string characterName) => Hide(characterName);
-            void HideAllCommand() => HideAll();
-            void SoundCommand(string soundName) => PlaySound(soundName);
-            void MusicCommand(string musicName) => PlayMusic(musicName);
-            void StopMusicCommand() => StopMusic();
-            void RaiseCommand(string eventName) => Raise(eventName);
-            void SceneCommand(string sceneName) => LoadScene(sceneName);
+            current = this;
 
-#pragma warning disable YS1020 // The names are deliberately not known at compile time (see above).
-            runner.AddCommandHandler(Commands[0], (Action<string>)BackgroundCommand);
-            runner.AddCommandHandler(Commands[1], (Action<string, string, string>)ShowCommand);
-            runner.AddCommandHandler(Commands[2], (Action<string, string>)MoodCommand);
-            runner.AddCommandHandler(Commands[3], (Action<string>)HideCommand);
-            runner.AddCommandHandler(Commands[4], (Action)HideAllCommand);
-            runner.AddCommandHandler(Commands[5], (Action<string>)SoundCommand);
-            runner.AddCommandHandler(Commands[6], (Action<string>)MusicCommand);
-            runner.AddCommandHandler(Commands[7], (Action)StopMusicCommand);
-            runner.AddCommandHandler(Commands[8], (Action<string>)RaiseCommand);
-            runner.AddCommandHandler(Commands[9], (Action<string>)SceneCommand);
-#pragma warning restore YS1020
+            if (!registered)
+            {
+                registered = true;
+                ActionInvoker.RegisterCommandHandler(IsStageCommand, RunStageCommand);
+            }
         }
 
         void OnDestroy()
         {
-            if (runner == null)
+            if (current == this)
             {
-                return;
+                current = null;
+            }
+        }
+
+        static bool IsStageCommand(string commandName) => current != null && Array.IndexOf(Commands, commandName) >= 0;
+
+        static YarnTask RunStageCommand(Yarn.Command command, LineCancellationToken token)
+        {
+            if (current != null)
+            {
+                current.Run(new List<string>(DialogueRunner.SplitCommandText(command.Text)));
             }
 
-            foreach (string command in Commands)
+            return YarnTask.CompletedTask;
+        }
+
+        /// <summary>Carries out one of the stage's commands, given as its words: the command name, then its parameters.</summary>
+        void Run(List<string> words)
+        {
+            string Word(int index) => index < words.Count ? words[index] : "";
+            int count = words.Count - 1;
+
+            switch (words[0])
             {
-                runner.RemoveCommandHandler(command);
+                case "background": if (Needs(words, 1, 1)) SetBackground(Word(1)); break;
+                case "show": if (Needs(words, 1, 3)) Show(Word(1), Word(2), Word(3)); break;
+                case "mood": if (Needs(words, 2, 2)) SetMood(Word(1), Word(2)); break;
+                case "hide": if (Needs(words, 1, 1)) Hide(Word(1)); break;
+                case "hide_all": HideAll(); break;
+                case "sound": if (Needs(words, 1, 1)) PlaySound(Word(1)); break;
+                case "music": if (Needs(words, 1, 1)) PlayMusic(Word(1)); break;
+                case "stop_music": StopMusic(); break;
+                case "raise": if (Needs(words, 1, 1)) Raise(Word(1)); break;
+                case "scene": if (Needs(words, 1, 1)) LoadScene(Word(1)); break;
+            }
+
+            bool Needs(List<string> all, int min, int max)
+            {
+                if (count >= min && count <= max)
+                {
+                    return true;
+                }
+
+                Debug.LogWarning($"Visual Novel Stage: <<{string.Join(" ", all)}>> needs {(min == max ? min.ToString() : $"{min} to {max}")} word(s) after \"{all[0]}\".", this);
+                return false;
             }
         }
 
