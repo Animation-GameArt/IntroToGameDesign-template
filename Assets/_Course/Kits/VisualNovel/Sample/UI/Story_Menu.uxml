@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="main-menu" class="screen">
+        <ui:Label name="title-label" text="Lantern Festival" class="title" />
+        <ui:Label name="subtitle-label" text="A night at the lantern festival. Who will you share it with?" class="subtitle" />
+        <ui:Button name="play-button" text="Play" class="menu-button" />
+        <ui:Button name="how-to-play-button" text="How to Play" class="menu-button" />
+        <ui:Button name="settings-button" text="Settings" class="menu-button" />
+        <ui:Button name="credits-button" text="Credits" class="menu-button" />
+        <ui:Button name="quit-button" text="Quit" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

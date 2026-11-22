@@ -30,11 +30,44 @@ EditorBuildSettings:
     path: Assets/_Course/Kits/Platformer/Sample-jmp/Scenes/Platformer_Win.unity
     guid: a01c6e367b2076043a8d978632805cc6
   - enabled: 1
-    path: Assets/_Course/Kits/CardGame/Sample/Scenes/Cards_Menu.unity
+    path: Assets/_Course/Kits/CardGame/Sample-jmp/Scenes/Cards_Menu.unity
     guid: 78a15af46cc37c742bbcaed0477d7a26
   - enabled: 1
-    path: Assets/_Course/Kits/CardGame/Sample/Scenes/Cards_Game.unity
+    path: Assets/_Course/Kits/CardGame/Sample-jmp/Scenes/Cards_Game.unity
     guid: bdb16b3aba77874409c5cf0d8eb69299
+  - enabled: 1
+    path: Assets/_Course/Kits/CardGame/Sample/Scenes/Cards_Menu.unity
+    guid: 93039bf6a87e55840afea038094fb4e0
+  - enabled: 1
+    path: Assets/_Course/Kits/CardGame/Sample/Scenes/Cards_Game.unity
+    guid: 912d23c0a8a48714dbf868d4bfb36a10
+  - enabled: 1
+    path: Assets/_Course/Kits/Management/Sample-jmp/Scenes/Village_Menu.unity
+    guid: 0faad6b53c1b00b47a751722f7de6992
+  - enabled: 1
+    path: Assets/_Course/Kits/Management/Sample-jmp/Scenes/Village_Game.unity
+    guid: f4717218caa7cf94da96e2474a25d93c
+  - enabled: 1
+    path: Assets/_Course/Kits/TurnBasedBattle/Sample-jmp/Scenes/Battle_Menu.unity
+    guid: fb263f268ba16c046a7827414cec4399
+  - enabled: 1
+    path: Assets/_Course/Kits/TurnBasedBattle/Sample-jmp/Scenes/Battle_1.unity
+    guid: 8b86f543ccecdf74e939777f308002be
+  - enabled: 1
+    path: Assets/_Course/Kits/TurnBasedBattle/Sample-jmp/Scenes/Battle_2.unity
+    guid: 791e2b1b1e13ca14cb93401153afec14
+  - enabled: 1
+    path: Assets/_Course/Kits/TurnBasedBattle/Sample-jmp/Scenes/Battle_3.unity
+    guid: f8fb350257fb33446b71c6053f0d30f3
+  - enabled: 1
+    path: Assets/_Course/Kits/TurnBasedBattle/Sample-jmp/Scenes/Battle_Win.unity
+    guid: fdeff766548128644b5a5b1c67832369
+  - enabled: 1
+    path: Assets/_Course/Kits/VisualNovel/Sample/Scenes/Story_Menu.unity
+    guid: c604f936a408af742bdc61849b58e4fe
+  - enabled: 1
+    path: Assets/_Course/Kits/VisualNovel/Sample/Scenes/Story_Game.unity
+    guid: ed3fba74c6fa05941a1c5612929f1443
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

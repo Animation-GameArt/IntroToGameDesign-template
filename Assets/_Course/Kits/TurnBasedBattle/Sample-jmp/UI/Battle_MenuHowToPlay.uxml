@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="Win three battles.&#10;&#10;On each of your fighters' turns, choose an action from the menu, then a target. Slash is reliable. Power Strike hits harder, but can miss. Defend halves the damage you take until your next turn. Potion heals.&#10;&#10;From the second battle, the Healer joins you: Heal restores an ally's health. The Hero's Firestorm hits every enemy, once per battle.&#10;&#10;Damage is the action's power plus the fighter's Attack, minus the target's Defense. Your fighters start each battle at full health." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

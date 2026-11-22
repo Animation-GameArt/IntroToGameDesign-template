@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="Win three battles in a row: a Slime, a Knight and a Demon.&#10;&#10;Each turn you draw five cards and get 3 energy. Click a card, or press its number, to play it. The number in its corner is its energy cost.&#10;&#10;Spades deal damage. Diamonds block: block stops damage until your next turn. Hearts heal. Clubs draw more cards, or give energy. The bigger the number on the card, the stronger it is.&#10;&#10;Above the enemy is what it will do next. Block when an attack is coming; attack when it isn't. Then press End Turn (or E, or Enter).&#10;&#10;Your health carries over between battles, and you heal 10 after each one." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

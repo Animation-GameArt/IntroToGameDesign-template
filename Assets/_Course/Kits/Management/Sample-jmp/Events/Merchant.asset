@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02044b55139456cab188c1e9016bf2c, type: 3}
+  m_Name: Merchant
+  m_EditorClassIdentifier: CollinGame.Kits.Management::CollinGame.Kits.Management.ManagementEvent
+  title: A Merchant Arrives
+  text: A merchant offers to trade.
+  weight: 1.5
+  earliestTurn: 2
+  onlyOnce: 0
+  condition:
+    resource: {fileID: 0}
+    amount: 0
+    timesEach: {fileID: 0}
+    divideBy: 1
+    randomExtra: 0
+    onlyWhen: 0
+    ifResource: {fileID: 0}
+    ifValue: 0
+  effects: []
+  choices:
+  - label: Buy grain
+    effects:
+    - resource: {fileID: 11400000, guid: 5edb866e8f2cdf94c91875a6d9c8f49f, type: 2}
+      amount: -15
+      timesEach: {fileID: 0}
+      divideBy: 1
+      randomExtra: 0
+      onlyWhen: 0
+      ifResource: {fileID: 0}
+      ifValue: 0
+    - resource: {fileID: 11400000, guid: d2b530934aa8c1e4e83c87140ac32b86, type: 2}
+      amount: 20
+      timesEach: {fileID: 0}
+      divideBy: 1
+      randomExtra: 0
+      onlyWhen: 0
+      ifResource: {fileID: 0}
+      ifValue: 0
+    result: 
+  - label: Sell wood
+    effects:
+    - resource: {fileID: 11400000, guid: 7594d4eb0415923478d075dadba73c6c, type: 2}
+      amount: -8
+      timesEach: {fileID: 0}
+      divideBy: 1
+      randomExtra: 0
+      onlyWhen: 0
+      ifResource: {fileID: 0}
+      ifValue: 0
+    - resource: {fileID: 11400000, guid: 5edb866e8f2cdf94c91875a6d9c8f49f, type: 2}
+      amount: 12
+      timesEach: {fileID: 0}
+      divideBy: 1
+      randomExtra: 0
+      onlyWhen: 0
+      ifResource: {fileID: 0}
+      ifValue: 0
+    result: 
+  - label: Send him away
+    effects: []
+    result: 

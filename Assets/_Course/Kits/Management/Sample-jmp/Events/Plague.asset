@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02044b55139456cab188c1e9016bf2c, type: 3}
+  m_Name: Plague
+  m_EditorClassIdentifier: CollinGame.Kits.Management::CollinGame.Kits.Management.ManagementEvent
+  title: Plague
+  text: Sickness spread through the village.
+  weight: 0.5
+  earliestTurn: 4
+  onlyOnce: 1
+  condition:
+    resource: {fileID: 0}
+    amount: 0
+    timesEach: {fileID: 0}
+    divideBy: 1
+    randomExtra: 0
+    onlyWhen: 0
+    ifResource: {fileID: 0}
+    ifValue: 0
+  effects:
+  - resource: {fileID: 11400000, guid: 4cb057c4333a9b5408c3c5f82ca05922, type: 2}
+    amount: -3
+    timesEach: {fileID: 0}
+    divideBy: 1
+    randomExtra: 0
+    onlyWhen: 0
+    ifResource: {fileID: 0}
+    ifValue: 0
+  choices: []

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="Click, tap, or press Space to read on. When choices appear, pick one: what you say changes how Ren and Mika feel about you, shown in the bars at the top right.&#10;&#10;Some choices are locked until you've done something earlier. At midnight on the bridge, you can only stand with someone who likes you enough.&#10;&#10;There are three endings. Play again to find them all." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

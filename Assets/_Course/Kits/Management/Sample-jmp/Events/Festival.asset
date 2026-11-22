@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a02044b55139456cab188c1e9016bf2c, type: 3}
+  m_Name: Festival
+  m_EditorClassIdentifier: CollinGame.Kits.Management::CollinGame.Kits.Management.ManagementEvent
+  title: Festival
+  text: The people ask for a harvest festival.
+  weight: 1
+  earliestTurn: 3
+  onlyOnce: 0
+  condition:
+    resource: {fileID: 0}
+    amount: 0
+    timesEach: {fileID: 0}
+    divideBy: 1
+    randomExtra: 0
+    onlyWhen: 0
+    ifResource: {fileID: 0}
+    ifValue: 0
+  effects: []
+  choices:
+  - label: Hold the festival
+    effects:
+    - resource: {fileID: 11400000, guid: 5edb866e8f2cdf94c91875a6d9c8f49f, type: 2}
+      amount: -10
+      timesEach: {fileID: 0}
+      divideBy: 1
+      randomExtra: 0
+      onlyWhen: 0
+      ifResource: {fileID: 0}
+      ifValue: 0
+    - resource: {fileID: 11400000, guid: 4cb057c4333a9b5408c3c5f82ca05922, type: 2}
+      amount: 2
+      timesEach: {fileID: 0}
+      divideBy: 1
+      randomExtra: 0
+      onlyWhen: 0
+      ifResource: {fileID: 0}
+      ifValue: 0
+    result: 
+  - label: Not this year
+    effects: []
+    result: The people grumble.

@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="Keep your village alive for ten years.&#10;&#10;Every year, each person eats 1 Food. If the Food runs out, people leave. When there's plenty of Food (30 or more), the village grows. Every 3 people pay 1 Gold in taxes.&#10;&#10;Drag a building card onto an empty plot to build it, if you can afford it. Farms make Food, Lumber Camps make Wood, Houses bring people, and Markets make Gold. Drag a building back onto the cards to remove it.&#10;&#10;Click End Turn to end the year, and read the report to see what changed. Sometimes something happens, and some events ask you to choose.&#10;&#10;If no one is left, the game is over." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

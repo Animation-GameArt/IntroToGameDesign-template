@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9891278c574244368a9998b150e05b9a, type: 3}
+  m_Name: House
+  m_EditorClassIdentifier: CollinGame.Kits.Management::CollinGame.Kits.Management.BuildingData
+  displayName: House
+  icon: {fileID: 21300000, guid: d9d567bccad705645af00f681d057170, type: 3}
+  description: +1 Person each year
+  cost:
+  - resource: {fileID: 11400000, guid: 7594d4eb0415923478d075dadba73c6c, type: 2}
+    amount: -12
+    timesEach: {fileID: 0}
+    divideBy: 1
+    randomExtra: 0
+    onlyWhen: 0
+    ifResource: {fileID: 0}
+    ifValue: 0
+  everyTurn:
+  - resource: {fileID: 11400000, guid: 4cb057c4333a9b5408c3c5f82ca05922, type: 2}
+    amount: 1
+    timesEach: {fileID: 0}
+    divideBy: 1
+    randomExtra: 0
+    onlyWhen: 0
+    ifResource: {fileID: 0}
+    ifValue: 0
+  count: {fileID: 0}
