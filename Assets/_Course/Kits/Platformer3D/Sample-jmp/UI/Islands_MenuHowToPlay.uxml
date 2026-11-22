@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="/Assets/_Course/Core/UI/CourseTheme.uss" />
+    <ui:VisualElement name="how-to-play" class="screen">
+        <ui:Label name="title-label" text="How to Play" class="title" />
+        <ui:ScrollView name="how-to-play-scroll" class="credits-scroll">
+            <ui:Label name="how-to-play-label" text="Cross the floating islands and touch the flag at the top of the tower.&#10;&#10;WASD or the left stick move, relative to the camera. The mouse or the right stick turn the camera. Space jumps (hold it to jump higher); Shift sprints.&#10;&#10;Moving platforms carry you; crumbling ones fall soon after you land. The red pad bounces you up high. Jump on the red cubes to defeat them; walking into them costs a heart.&#10;&#10;Fall off, or lose every heart, and you start again from the last pole you touched. Collect all twenty coins if you can. Esc pauses." class="credits-text" />
+        </ui:ScrollView>
+        <ui:Button name="back-button" text="Back" class="menu-button" />
+    </ui:VisualElement>
+</ui:UXML>

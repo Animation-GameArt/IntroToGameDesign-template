@@ -69,11 +69,17 @@ EditorBuildSettings:
     path: Assets/_Course/Kits/VisualNovel/Sample-jmp/Scenes/Story_Game.unity
     guid: ed3fba74c6fa05941a1c5612929f1443
   - enabled: 1
-    path: Assets/_Course/Kits/Platformer3D/Sample/Scenes/Islands_Menu.unity
+    path: Assets/_Course/Kits/Platformer3D/Sample-jmp/Scenes/Islands_Menu.unity
     guid: 5b970090787df5641ac8753a3f468fad
   - enabled: 1
-    path: Assets/_Course/Kits/Platformer3D/Sample/Scenes/Islands_Level.unity
+    path: Assets/_Course/Kits/Platformer3D/Sample-jmp/Scenes/Islands_Level.unity
     guid: 024e3ea2212d4224d9c69a5f88731dd4
+  - enabled: 1
+    path: Assets/_Course/Kits/Stealth/Sample/Scenes/NightShift_Menu.unity
+    guid: 803a5f04b7d356343804281a8d93a701
+  - enabled: 1
+    path: Assets/_Course/Kits/Stealth/Sample/Scenes/NightShift_Level.unity
+    guid: 4f78ee3a54e2b3142b1c2bda876dc78f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
