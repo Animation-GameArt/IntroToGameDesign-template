@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: 78b228f0de244e8bbfedca169c92ffc7, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
-  m_SortingOrder: 0
+  sourceAsset: {fileID: 9197481963319205126, guid: 6711f149eb3b6334096917bd143e83b1, type: 3}
+  m_SortingOrder: 2
   m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -239,6 +239,22 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - buttonName: settings-button
+    onClick:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3428343057981756736}
+          m_TargetAssemblyTypeName: CollinGame.Core.UIScreen, CollinGame.Core
+          m_MethodName: Show
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - buttonName: restart-button
     onClick:
       m_PersistentCalls:
@@ -414,7 +430,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 78b228f0de244e8bbfedca169c92ffc7, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: ea2d6e97460b4534688eb3bba7d8ecc9, type: 3}
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
@@ -753,7 +769,7 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: 78b228f0de244e8bbfedca169c92ffc7, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: d83f7b5bd299e3243a36188a0c1185b5, type: 3}
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Position: 0
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
