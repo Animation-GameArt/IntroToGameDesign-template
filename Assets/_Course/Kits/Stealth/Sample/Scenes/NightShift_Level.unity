@@ -198,7 +198,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3416157081146544761, guid: 06daf17597c48e34592068220dd5d759, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 919718679}
   m_SourcePrefab: {fileID: 100100000, guid: 06daf17597c48e34592068220dd5d759, type: 3}
 --- !u!1001 &173033724
 PrefabInstance:
@@ -275,7 +278,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3416157081146544761, guid: 06daf17597c48e34592068220dd5d759, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 853714441}
   m_SourcePrefab: {fileID: 100100000, guid: 06daf17597c48e34592068220dd5d759, type: 3}
 --- !u!1 &247906359
 GameObject:
@@ -898,6 +904,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6239892253337811695, guid: c7e0acb5e9743394f9a9d458448476a1, type: 3}
   m_PrefabInstance: {fileID: 327356262}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &342289283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 371664700321598221, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
+  m_PrefabInstance: {fileID: 1097770092}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &379448028
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -953,7 +964,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7604069215598560894, guid: 60503a46bf2923b4883b5fb04fdf7cf9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2145618595}
   m_SourcePrefab: {fileID: 100100000, guid: 60503a46bf2923b4883b5fb04fdf7cf9, type: 3}
 --- !u!4 &379448029 stripped
 Transform:
@@ -1426,6 +1440,7 @@ GameObject:
   - component: {fileID: 600009118}
   - component: {fileID: 600009117}
   - component: {fileID: 600009116}
+  - component: {fileID: 600009119}
   m_Layer: 0
   m_Name: Exit Zone
   m_TagString: Untagged
@@ -1491,6 +1506,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &600009119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600009115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eba49c666a474093f92a26d710f64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.MinimapMarker3D
+  shape: 1
+  color: {r: 0.41960785, g: 0.8392157, b: 0.41960785, a: 1}
+  size: 2
+  heightAbove: 0
+  order: 0
 --- !u!1 &603662492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,6 +2083,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838254505}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &853714440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3416157081146544761, guid: 06daf17597c48e34592068220dd5d759, type: 3}
+  m_PrefabInstance: {fileID: 173033724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &853714441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853714440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eba49c666a474093f92a26d710f64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.MinimapMarker3D
+  shape: 2
+  color: {r: 0.8784314, g: 0.3137255, b: 0.3137255, a: 1}
+  size: 1.8
+  heightAbove: 5
+  order: 0
 --- !u!1 &883387599
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,6 +2329,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 907202820}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &919718678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3416157081146544761, guid: 06daf17597c48e34592068220dd5d759, type: 3}
+  m_PrefabInstance: {fileID: 127496442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &919718679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919718678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eba49c666a474093f92a26d710f64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.MinimapMarker3D
+  shape: 2
+  color: {r: 0.8784314, g: 0.3137255, b: 0.3137255, a: 1}
+  size: 1.8
+  heightAbove: 5
+  order: 0
 --- !u!1 &949327023
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,13 +2552,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 371664700321598221, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1005564965}
   m_SourcePrefab: {fileID: 100100000, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
 --- !u!4 &953974168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5813873811415156443, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
   m_PrefabInstance: {fileID: 953974167}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1005564964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 371664700321598221, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
+  m_PrefabInstance: {fileID: 953974167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1005564965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005564964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eba49c666a474093f92a26d710f64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.MinimapMarker3D
+  shape: 0
+  color: {r: 1, g: 0.8235294, b: 0.24705882, a: 1}
+  size: 1.2
+  heightAbove: 1
+  order: 0
 --- !u!1 &1032934083
 GameObject:
   m_ObjectHideFlags: 0
@@ -2674,13 +2775,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 371664700321598221, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1097770094}
   m_SourcePrefab: {fileID: 100100000, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
 --- !u!4 &1097770093 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5813873811415156443, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
   m_PrefabInstance: {fileID: 1097770092}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1097770094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342289283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eba49c666a474093f92a26d710f64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.MinimapMarker3D
+  shape: 0
+  color: {r: 1, g: 0.8235294, b: 0.24705882, a: 1}
+  size: 1.2
+  heightAbove: 1
+  order: 0
 --- !u!1 &1167499050
 GameObject:
   m_ObjectHideFlags: 0
@@ -3300,6 +3421,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375618240}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1446953561 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 371664700321598221, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
+  m_PrefabInstance: {fileID: 1947129046}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1471684740
 GameObject:
   m_ObjectHideFlags: 0
@@ -5177,6 +5303,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stealth Systems
       objectReference: {fileID: 0}
+    - target: {fileID: 8587039799256325007, guid: 24dca4d6b6cc59d429b3fe4fd46db34a, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 2145618594}
+    - target: {fileID: 8587039799256325007, guid: 24dca4d6b6cc59d429b3fe4fd46db34a, type: 3}
+      propertyPath: document
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5237,13 +5371,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 371664700321598221, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1947129048}
   m_SourcePrefab: {fileID: 100100000, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
 --- !u!4 &1947129047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5813873811415156443, guid: 489ffcaa437ee694785f678937dbbb12, type: 3}
   m_PrefabInstance: {fileID: 1947129046}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1947129048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446953561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eba49c666a474093f92a26d710f64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.MinimapMarker3D
+  shape: 0
+  color: {r: 1, g: 0.8235294, b: 0.24705882, a: 1}
+  size: 1.2
+  heightAbove: 1
+  order: 0
 --- !u!1 &1947884044
 GameObject:
   m_ObjectHideFlags: 0
@@ -5565,6 +5719,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112352617}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2145618593 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7604069215598560894, guid: 60503a46bf2923b4883b5fb04fdf7cf9, type: 3}
+  m_PrefabInstance: {fileID: 379448028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2145618594 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2784840688751181612, guid: 60503a46bf2923b4883b5fb04fdf7cf9, type: 3}
+  m_PrefabInstance: {fileID: 379448028}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2145618595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145618593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eba49c666a474093f92a26d710f64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.MinimapMarker3D
+  shape: 2
+  color: {r: 0.30980393, g: 0.7647059, b: 0.96862745, a: 1}
+  size: 1.8
+  heightAbove: 4
+  order: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

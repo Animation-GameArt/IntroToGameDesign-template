@@ -230,6 +230,7 @@ Transform:
   - {fileID: 4500361501729561144}
   - {fileID: 9200309236944290155}
   - {fileID: 5544752129021487763}
+  - {fileID: 5562534609796229746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2030456531907893304
@@ -570,6 +571,89 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!1 &3107217716277891692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5562534609796229746}
+  - component: {fileID: 4135874219805335059}
+  - component: {fileID: 8587039799256325007}
+  m_Layer: 0
+  m_Name: Minimap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5562534609796229746
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107217716277891692}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 163358883844841511}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4135874219805335059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107217716277891692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 78b228f0de244e8bbfedca169c92ffc7, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 87c0d9c0e1994397b700256005efa902, type: 3}
+  m_SortingOrder: 1
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &8587039799256325007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107217716277891692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc2ba127392e43d9bc032b4154ef9902, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollinGame.ThreeD::CollinGame.ThreeD.Minimap3D
+  target: {fileID: 0}
+  viewSize: 12
+  bigViewSize: 16
+  height: 40
+  turnWithTarget: 0
+  showLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  background: {r: 0.05, g: 0.06, b: 0.08, a: 1}
+  rendererIndex: 1
+  document: {fileID: 0}
+  resolution: 512
+  toggleKey: 27
+  bigMapKey: 3
+  visibleAtStart: 1
 --- !u!1 &4919480160632476134
 GameObject:
   m_ObjectHideFlags: 0
